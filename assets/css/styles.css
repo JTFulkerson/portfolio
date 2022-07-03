@@ -37,8 +37,7 @@ a {
 }
 
 a:hover {
-    text-decoration: none;
-    color: var(--secondary-color);
+    text-decoration: underline;
 }
 
 nav {
@@ -50,7 +49,7 @@ nav {
     align-items: center;
     justify-content: space-between;
     padding: 1.5rem 3.5rem;
-    background-color: var(--bg-color);
+    background-color: #003d75;
     box-shadow: 0 3px 5px rgb(0, 0, 0);
 }
 
