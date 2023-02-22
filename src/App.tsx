@@ -1,11 +1,45 @@
-import classNames from 'classnames';
+import React from 'react';
 
-function App() {
+const App = () => {
   return (
-    <div className="h-full items-center bg-black text-white">
-      <h1>React Use Hotkeys</h1>
-    </div>
+    <header className="bg-white p-6 shadow">
+      <div className="flex items-center justify-between max-w-5xl mx-auto">
+        <h1 className="text-lg font-bold">John Fulkerson</h1>
+        <nav className="">
+          <a
+            className="inline-block px-4 py-2 font-medium text-gray-700 hover:text-indigo-500"
+            href="./"
+          >
+            Home
+          </a>
+          <a
+            className="inline-block px-4 py-2 font-medium text-gray-700 hover:text-indigo-500"
+            href="./About"
+          >
+            About
+          </a>
+          <a
+            className="inline-block px-4 py-2 font-medium text-gray-700 hover:text-indigo-500"
+            href="./Projects"
+          >
+            Projects
+          </a>
+          <a
+            className="inline-block px-4 py-2 font-medium text-gray-700 hover:text-indigo-500"
+            href="/pages/timer."
+          >
+            Timer
+          </a>
+          <a
+            className="inline-block px-4 py-2 font-medium text-gray-700 hover:text-indigo-500"
+            href="./Contact"
+          >
+            Contact
+          </a>
+        </nav>
+      </div>
+    </header>
   );
-}
+};
 
 export default App;
