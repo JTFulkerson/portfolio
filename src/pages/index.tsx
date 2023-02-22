@@ -16,18 +16,18 @@ const Home = () => {
         <div className="grid grid-flow-col">
           <img src={Headshot} alt="" className="w-[40vw]"></img>
           <div className="h-[10vh] w-[40vw]">
-            <h1 className="text-left text-[7vw]">John</h1>
-            <h1 className="text-left text-[7vw]">Fulkerson</h1>
+            <h1 className="text-left text-[8vw]">John</h1>
+            <h1 className="text-left text-[8vw]">Fulkerson</h1>
             <h2 className="text-left text-[1.8vw] pb-3">
               BS Computer Science | University of Delaware ’26
             </h2>
-            <div className="grid grid-flow-col">
-              <img src={Email} alt=""></img>
-              <img src={Github} alt=""></img>
-              <img src={Linkedin} alt=""></img>
-              <img src={Instagram} alt=""></img>
-              <img src={Twitter} alt=""></img>
-              <img src={Facebook} alt=""></img>
+            <div className="grid grid-flow-col ">
+              <img src={Email} alt="" className="pr-2"></img>
+              <img src={Github} alt="" className="pr-2"></img>
+              <img src={Linkedin} alt="" className="pr-2"></img>
+              <img src={Instagram} alt="" className="pr-2"></img>
+              <img src={Twitter} alt="" className="pr-2"></img>
+              <img src={Facebook} alt="" className="pr-2"></img>
             </div>
           </div>
         </div>
