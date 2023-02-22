@@ -1,44 +1,23 @@
 import React from 'react';
+//pages
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './pages';
+import About from './pages/about';
+import Projects from './pages/projects';
+import Timer from './pages/timer';
+import Contact from './pages/contact';
 
 const App = () => {
   return (
-    <header className="bg-white p-6 shadow">
-      <div className="flex items-center justify-between max-w-5xl mx-auto">
-        <h1 className="text-lg font-bold">John Fulkerson</h1>
-        <nav className="">
-          <a
-            className="inline-block px-4 py-2 font-medium text-gray-700 hover:text-indigo-500"
-            href="./"
-          >
-            Home
-          </a>
-          <a
-            className="inline-block px-4 py-2 font-medium text-gray-700 hover:text-indigo-500"
-            href="./About"
-          >
-            About
-          </a>
-          <a
-            className="inline-block px-4 py-2 font-medium text-gray-700 hover:text-indigo-500"
-            href="./Projects"
-          >
-            Projects
-          </a>
-          <a
-            className="inline-block px-4 py-2 font-medium text-gray-700 hover:text-indigo-500"
-            href="/pages/timer."
-          >
-            Timer
-          </a>
-          <a
-            className="inline-block px-4 py-2 font-medium text-gray-700 hover:text-indigo-500"
-            href="./Contact"
-          >
-            Contact
-          </a>
-        </nav>
-      </div>
-    </header>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/projects" element={<Projects />} />
+        <Route path="/timer" element={<Timer />} />
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
+    </Router>
   );
 };
 
