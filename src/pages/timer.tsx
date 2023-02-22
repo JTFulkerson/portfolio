@@ -1,6 +1,7 @@
 import classnames from 'classnames';
 import React, { PropsWithChildren, useEffect, useState } from 'react';
 import useHotkeys from '@reecelucas/react-use-hotkeys';
+import { Helmet } from 'react-helmet';
 
 type UnitOfTimeT = 'MINUTES' | 'SECONDS';
 
@@ -27,7 +28,7 @@ function UnitOfTime(props: {
   );
 }
 
-function Timer() {
+function App() {
   const [isRunning, setRunning] = useState(false);
   const [timer, setTimer] = useState<[number, number]>([0, 0]);
   const [initTimer, setInitTimer] = useState<[number, number]>([0, 0]);
@@ -36,7 +37,6 @@ function Timer() {
     UnitOfTimeT | undefined
   >();
   const [typing, setTyping] = useState<[string, string]>(['', '']);
-  const [chime, setChime] = useState<boolean>(false);
 
   type ButtonProps = { className: string; onClick: () => void };
   function Button(props: PropsWithChildren<ButtonProps>) {
@@ -99,7 +99,6 @@ function Timer() {
         setTimer([timer[0], newValue]);
       }
       setTyping(['', '']);
-      setInitTimer([timer[0], timer[1]]);
     }
   });
 
@@ -136,9 +135,6 @@ function Timer() {
       const interval = setInterval(() => {
         if (timer[0] === 0 && timer[1] === 0) {
           setRunning(false);
-          if (chime) {
-            //code to start chime
-          }
         } else if (timer[1] === 0) {
           setTimer([timer[0] - 1, 59]);
         } else {
@@ -147,27 +143,25 @@ function Timer() {
       }, 1000);
       return () => clearInterval(interval);
     }
-  }, [chime, isRunning, timer]);
+  }, [isRunning, timer]);
 
   return (
-    <div
-      className={classnames('h-full bg-black', {
-        'bg-yellow-500': timer[1] <= 10 && timer[1] > 0 && timer[0] === 0,
-        'bg-[#8B0000]':
-          timer[0] === 0 && timer[1] === 0 && (initTimer[0] || initTimer[1]),
-      })}
-    >
-      <nav>
-        <button
-          className="text-white"
-          onClick={() => {
-            setChime(!chime);
-          }}
-        >
-          Chime: {chime ? 'Off' : 'On'}
-        </button>
-      </nav>
-      <main className="flex flex-col items-center justify-center gap-[3vmin]">
+    <div className="h-full">
+      <Helmet>
+        <title>Timer</title>
+      </Helmet>
+      <div
+        className={classnames(
+          'flex flex-col items-center justify-center h-full gap-[3vmin] bg-black',
+          {
+            'bg-yellow-500': timer[1] <= 10 && timer[1] > 0 && timer[0] === 0,
+            'bg-[#8B0000]':
+              timer[0] === 0 &&
+              timer[1] === 0 &&
+              (initTimer[0] || initTimer[1]),
+          }
+        )}
+      >
         <p className="text-white font-bold text-[44vmin]">
           <UnitOfTime
             value={timer[0]}
@@ -254,9 +248,9 @@ function Timer() {
             3:00
           </Button>
         </div>
-      </main>
+      </div>
     </div>
   );
 }
 
-export default Timer;
+export default App;

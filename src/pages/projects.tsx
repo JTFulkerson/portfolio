@@ -16,7 +16,7 @@ const Projects: React.FC = () => {
       title: 'Custom Meal Request',
       description:
         'This is a custom meal reuqeust command line application written in Python. Its purpose is to make the custom meal ordering process easier for those with dietary restrictions at the University of Delaware dini',
-      link: 'https://www.example.com/project2',
+      link: 'https://github.com/JTFulkerson/CustomMealRequest',
     },
     {
       imageUrl: 'https://via.placeholder.com/500',
@@ -31,7 +31,7 @@ const Projects: React.FC = () => {
     <div>
       <Navbar />
       <div className="max-w-6xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-        <h1 className="text-3xl font-bold mb-8">My Projects</h1>
+        <h1 className="text-xl font-bold mb-8">My Projects</h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {projects.map((project) => (
             <a
@@ -46,7 +46,7 @@ const Projects: React.FC = () => {
               />
               <div className="p-6">
                 <h2 className="text-lg font-bold mb-2">{project.title}</h2>
-                <p className="text-gray-600">{project.description}</p>
+                <p className="text-base text-gray-600">{project.description}</p>
               </div>
             </a>
           ))}
