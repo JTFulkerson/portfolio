@@ -2,6 +2,7 @@ import classnames from 'classnames';
 import React, { PropsWithChildren, useEffect, useState } from 'react';
 import useHotkeys from '@reecelucas/react-use-hotkeys';
 import { Helmet } from 'react-helmet';
+import Favicon from '../icons/timer-favicon.png';
 
 type UnitOfTimeT = 'MINUTES' | 'SECONDS';
 
@@ -30,9 +31,9 @@ function UnitOfTime(props: {
 
 function App() {
   const [isRunning, setRunning] = useState(false);
-  const [timer, setTimer] = useState<[number, number]>([0, 0]);
-  const [initTimer, setInitTimer] = useState<[number, number]>([0, 0]);
-  const [stoppedTimer, setStoppedTimer] = useState<[number, number]>([0, 0]);
+  const [timer, setTimer] = useState<[number, number]>([1, 0]);
+  const [initTimer, setInitTimer] = useState<[number, number]>([1, 0]);
+  const [stoppedTimer, setStoppedTimer] = useState<[number, number]>([1, 0]);
   const [activeUnitOfTime, setActiveUnitOfTime] = useState<
     UnitOfTimeT | undefined
   >();
@@ -149,16 +150,14 @@ function App() {
     <div className="h-full">
       <Helmet>
         <title>Timer</title>
+        <link rel="icon" href={Favicon} />
       </Helmet>
       <div
         className={classnames(
           'flex flex-col items-center justify-center h-full gap-[3vmin] bg-black',
           {
             'bg-yellow-500': timer[1] <= 10 && timer[1] > 0 && timer[0] === 0,
-            'bg-[#8B0000]':
-              timer[0] === 0 &&
-              timer[1] === 0 &&
-              (initTimer[0] || initTimer[1]),
+            'bg-[#8B0000]': timer[0] === 0 && timer[1] === 0,
           }
         )}
       >

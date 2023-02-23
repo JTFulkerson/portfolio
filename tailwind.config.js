@@ -8,7 +8,9 @@ module.exports = {
       xl: '2rem',
       '2xl': '4rem',
     },
-    extend: {},
+    extend: {
+      backgroundImage: {},
+    },
   },
   plugins: [],
 };

@@ -1,6 +1,8 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
 import Timer from '../images/timer-visual.jpg';
+import MealRequest from '../images/meal-request-visual.png';
+import Wordle from '../images/wordle-visual.png';
 
 const Projects: React.FC = () => {
   const projects = [
@@ -12,18 +14,18 @@ const Projects: React.FC = () => {
       link: './timer',
     },
     {
-      imageUrl: 'https://via.placeholder.com/500',
+      imageUrl: MealRequest,
       title: 'Custom Meal Request',
       description:
-        'This is a custom meal reuqeust command line application written in Python. Its purpose is to make the custom meal ordering process easier for those with dietary restrictions at the University of Delaware dini',
+        'This is a custom meal request command line application written in Python. Its purpose is to make the custom meal ordering process easier for those with dietary restrictions at the University of Delaware dining halls.',
       link: 'https://github.com/JTFulkerson/CustomMealRequest',
     },
     {
-      imageUrl: 'https://via.placeholder.com/500',
-      title: 'Project 3',
+      imageUrl: Wordle,
+      title: 'Wordle',
       description:
-        'Vestibulum vel metus finibus, auctor elit nec, sagittis purus. Proin hendrerit rhoncus diam quis lobortis.',
-      link: 'https://www.example.com/project3',
+        'I was inspired by the Wordle game to create my own command line version. This takes a text file of previous words and randomly shuffles though to help practice for the game.',
+      link: 'https://github.com/JTFulkerson/Wordle',
     },
   ];
 

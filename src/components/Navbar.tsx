@@ -24,6 +24,12 @@ const Navbar = () => {
           >
             Projects
           </a>
+          <a
+            className="inline-block px-4 py-2 font-medium text-lg text-gray-700 hover:text-blue-500"
+            href={require('../documents/Fulkerson_John_Resume.pdf')}
+          >
+            Resume
+          </a>
         </nav>
       </div>
     </header>
