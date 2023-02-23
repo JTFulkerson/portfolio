@@ -2,7 +2,7 @@
   "name": "johntfulkerson",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://JTFulkerson.github.io/",
+  "homepage": "https://jtfulkerson.github.io/personal-portfolio",
   "dependencies": {
     "@reecelucas/react-use-hotkeys": "^2.0.0",
     "@testing-library/jest-dom": "^5.14.1",
