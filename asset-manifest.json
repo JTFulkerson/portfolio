@@ -1,26 +1,26 @@
 {
   "files": {
-    "main.css": "/personal-portfolio/static/css/main.ef1ab9f8.css",
-    "main.js": "/personal-portfolio/static/js/main.b4f16c86.js",
-    "static/js/787.fb771931.chunk.js": "/personal-portfolio/static/js/787.fb771931.chunk.js",
-    "static/media/headshot.png": "/personal-portfolio/static/media/headshot.20bab079b146ec77d373.png",
-    "static/media/wordle-visual.png": "/personal-portfolio/static/media/wordle-visual.78063901f59795e0606b.png",
-    "static/media/timer-visual.jpg": "/personal-portfolio/static/media/timer-visual.2b448718f7cef1ade83c.jpg",
-    "static/media/meal-request-visual.png": "/personal-portfolio/static/media/meal-request-visual.040acc64a6fb2b11840d.png",
-    "static/media/Fulkerson_John_Resume.pdf": "/personal-portfolio/static/media/Fulkerson_John_Resume.d677df0883e143403102.pdf",
-    "static/media/instagram.svg": "/personal-portfolio/static/media/instagram.537b396b3abe5067c38a4c034ce04dba.svg",
-    "static/media/linkedin.svg": "/personal-portfolio/static/media/linkedin.1a98318dec6cbe0c78229e6ba78301da.svg",
-    "static/media/github.svg": "/personal-portfolio/static/media/github.2778f35fee044f99c8d1d1604fc8ca70.svg",
-    "static/media/twitter.svg": "/personal-portfolio/static/media/twitter.650e23c80e25dcc6c77271640565d346.svg",
-    "static/media/email.svg": "/personal-portfolio/static/media/email.4734b713f6afd7634fa2930a55580a26.svg",
-    "index.html": "/personal-portfolio/index.html",
-    "static/media/facebook.svg": "/personal-portfolio/static/media/facebook.954cd09d25f057565f08f4dca8e079a0.svg",
-    "main.ef1ab9f8.css.map": "/personal-portfolio/static/css/main.ef1ab9f8.css.map",
-    "main.b4f16c86.js.map": "/personal-portfolio/static/js/main.b4f16c86.js.map",
-    "787.fb771931.chunk.js.map": "/personal-portfolio/static/js/787.fb771931.chunk.js.map"
+    "main.css": "/static/css/main.ef1ab9f8.css",
+    "main.js": "/static/js/main.aec25705.js",
+    "static/js/787.fb771931.chunk.js": "/static/js/787.fb771931.chunk.js",
+    "static/media/headshot.png": "/static/media/headshot.20bab079b146ec77d373.png",
+    "static/media/wordle-visual.png": "/static/media/wordle-visual.78063901f59795e0606b.png",
+    "static/media/timer-visual.jpg": "/static/media/timer-visual.2b448718f7cef1ade83c.jpg",
+    "static/media/meal-request-visual.png": "/static/media/meal-request-visual.040acc64a6fb2b11840d.png",
+    "static/media/Fulkerson_John_Resume.pdf": "/static/media/Fulkerson_John_Resume.d677df0883e143403102.pdf",
+    "static/media/instagram.svg": "/static/media/instagram.537b396b3abe5067c38a4c034ce04dba.svg",
+    "static/media/linkedin.svg": "/static/media/linkedin.1a98318dec6cbe0c78229e6ba78301da.svg",
+    "static/media/github.svg": "/static/media/github.2778f35fee044f99c8d1d1604fc8ca70.svg",
+    "static/media/twitter.svg": "/static/media/twitter.650e23c80e25dcc6c77271640565d346.svg",
+    "static/media/email.svg": "/static/media/email.4734b713f6afd7634fa2930a55580a26.svg",
+    "static/media/facebook.svg": "/static/media/facebook.954cd09d25f057565f08f4dca8e079a0.svg",
+    "index.html": "/index.html",
+    "main.ef1ab9f8.css.map": "/static/css/main.ef1ab9f8.css.map",
+    "main.aec25705.js.map": "/static/js/main.aec25705.js.map",
+    "787.fb771931.chunk.js.map": "/static/js/787.fb771931.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.ef1ab9f8.css",
-    "static/js/main.b4f16c86.js"
+    "static/js/main.aec25705.js"
   ]
 }
