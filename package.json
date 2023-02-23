@@ -2,7 +2,7 @@
   "name": "portfolio",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://jtfulkerson.github.io/portfolio/",
+  "homepage": "https://jtfulkerson.github.io",
   "dependencies": {
     "@reecelucas/react-use-hotkeys": "^2.0.0",
     "@testing-library/jest-dom": "^5.14.1",
