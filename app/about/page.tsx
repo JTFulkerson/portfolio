@@ -2,7 +2,7 @@ import Image from "next/image";
 import Navbar from "../navbar";
 
 const About = () => {
-    const projects = [
+    const projects: { imageUrl: string, title: string, description: string }[] = [
         {
             imageUrl: "/images/ud-sailing.jpg",
             title: 'University of Delaware Club Sailing Team',
@@ -18,7 +18,6 @@ const About = () => {
                 <div className="grid grid-cols-1 gap-6">
                     {projects.map((project) => (
                         <a
-                            href={project.link}
                             key={project.title}
                             className="flex rounded-lg overflow-hidden shadow-md"
                         >
