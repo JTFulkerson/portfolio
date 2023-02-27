@@ -71,7 +71,7 @@ const Home = () => {
                     <Image
                       src={social.imageUrl}
                       alt=""
-                      className="1vw p-1 hover:drop-shadow-xl hover:pt-0 transition-transform ease-in-out"
+                      className="1vw p-1 hover:drop-shadow-xl hover:pt-0"
                       width={100}
                       height={24}
                       priority
