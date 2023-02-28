@@ -150,10 +150,11 @@ const Timer = () => {
         <>
             <div
                 className={classnames(
-                    'flex flex-col items-center justify-center gap-[3vmin] bg-black h-screen',
+                    'flex flex-col items-center justify-center gap-[3vmin] h-screen',
                     {
                         'bg-yellow-500': timer[1] <= 10 && timer[1] > 0 && timer[0] === 0,
                         'bg-[#8B0000]': timer[0] === 0 && timer[1] === 0,
+                        'bg-black': timer[0] !== 0 || timer[1] !== 0,
                     }
                 )}
             >
