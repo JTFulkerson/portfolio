@@ -58,7 +58,7 @@ const Home = () => {
           className="grid sm:grid-cols-2 w-fit h-fit"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
+          transition={{ duration: 0.8 }}
         >
           <Image
             src="/images/headshot.png"
@@ -72,14 +72,14 @@ const Home = () => {
             className="flex justify-center items-center pl-10"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
           >
             <div>
               <motion.h1
                 className="text-left text-[8vw] leading-none"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 1.2 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
               >
                 John
               </motion.h1>
@@ -87,7 +87,7 @@ const Home = () => {
                 className="text-left text-[8vw] leading-none"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 1.4 }}
+                transition={{ duration: 0.8, delay: 0.6 }}
               >
                 Fulkerson
               </motion.h1>
@@ -95,7 +95,7 @@ const Home = () => {
                 className="text-left text-[1.8vw] pb-3"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 1.6 }}
+                transition={{ duration: 0.8, delay: 0.8 }}
               >
                 BS Computer Science | University of Delaware ’26
               </motion.h2>
@@ -103,7 +103,7 @@ const Home = () => {
                 className="grid grid-flow-col"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ duration: 0.8, delay: 2 }}
+                transition={{ duration: 0.8, delay: 1.0 }}
               >
                 {socials.map((social) => (
                   <a href={social.link} key={social.title}>
@@ -111,11 +111,12 @@ const Home = () => {
                       className="1vw p-1 hover:pt-0"
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.8, delay: 2.2 }}
+                      transition={{ duration: 0.8, delay: 1.2 }}
                       whileHover={{ scale: 1.2, zIndex: 1 }}
                       whileTap={{ scale: 0.8 }}
                     >
                       <Image
+                        className="h-full w-ful"
                         src={social.imageUrl}
                         alt=""
                         width={100}
