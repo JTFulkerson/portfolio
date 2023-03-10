@@ -7,7 +7,7 @@ const Jobs = () => {
     const jobs = [
         {
             companyLogoUrl: "/images/ud-minimal-logo.jpg",
-            companyName: "University of Delaware",
+            companyName: "University of Delaware, Newark, DE",
             jobTitle: "Lab Assistant",
             jobDuration: "March 2023 - Present",
             jobDescription:
@@ -15,11 +15,11 @@ const Jobs = () => {
         },
         {
             companyLogoUrl: "/images/fcps-minimal-logo.png",
-            companyName: "Fairfax County Public Schools",
+            companyName: "Fairfax County Public Schools, McLean, VA",
             jobTitle: "Student Technician event Event Technician",
             jobDuration: "October 2019 - Present",
             jobDescription:
-                "Worked as a technician managing spaces while groups rented out FCPS spaces.Was mainly in charge of designing and executing sounds and lights equipment however we I was also in charge of general tech support or equipment rental setups.",
+                "Worked as a technician managing spaces while groups rented out FCPS spaces. Was mainly in charge of designing and executing sounds and lights equipment however we I was also in charge of general tech support or equipment rental setups.",
         },
     ];
 

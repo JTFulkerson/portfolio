@@ -42,7 +42,7 @@ const Home = () => {
     <>
       <Head>
         <title>John Fulkerson | Portfolio</title>
-        <meta name="description" content="John Fulkerson's Portfolio" />
+        <meta name="description" content="John Fulkerson, a Computer Science student at the University of Delaware." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
