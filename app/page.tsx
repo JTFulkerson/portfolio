@@ -1,6 +1,8 @@
+"use client"
 import Head from "next/head";
 import Image from "next/image";
 import Navbar from "./navbar";
+import { motion } from "framer-motion";
 
 const Home = () => {
   const socials = [
@@ -45,8 +47,18 @@ const Home = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar />
-      <div className="py-12 px-12">
-        <div className="grid sm:grid-cols-2 w-fit h-fit">
+      <motion.div
+        className="py-12 px-12"
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+      >
+        <motion.div
+          className="grid sm:grid-cols-2 w-fit h-fit"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+        >
           <Image
             src="/images/headshot.png"
             alt=""
@@ -54,37 +66,71 @@ const Home = () => {
             height={1000}
             width={1000}
             priority
-          ></Image>
-          <div className="flex justify-center items-center pl-10">
+          />
+          <motion.div
+            className="flex justify-center items-center pl-10"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
+          >
             <div>
-              <h1 className="text-left text-[8vw] leading-none">John</h1>
-              <h1 className="text-left text-[8vw] leading-none">Fulkerson</h1>
-              <h2 className="text-left text-[1.8vw] pb-3">
+              <motion.h1
+                className="text-left text-[8vw] leading-none"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 1.2 }}
+              >
+                John
+              </motion.h1>
+              <motion.h1
+                className="text-left text-[8vw] leading-none"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 1.4 }}
+              >
+                Fulkerson
+              </motion.h1>
+              <motion.h2
+                className="text-left text-[1.8vw] pb-3"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 1.6 }}
+              >
                 BS Computer Science | University of Delaware ’26
-              </h2>
-              <div className="grid grid-flow-col">
+              </motion.h2>
+              <motion.div
+                className="grid grid-flow-col"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.8, delay: 2 }}
+              >
                 {socials.map((social) => (
-                  <a
-                    href={social.link}
-                    key={social.title}
-                  >
-                    <Image
-                      src={social.imageUrl}
-                      alt=""
-                      className="1vw p-1 hover:drop-shadow-xl hover:pt-0"
-                      width={100}
-                      height={24}
-                      priority
-                    />
+                  <a href={social.link} key={social.title}>
+                    <motion.div
+                      className="1vw p-1 hover:pt-0"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.8, delay: 2.2 }}
+                      whileHover={{ scale: 1.2, zIndex: 1 }}
+                      whileTap={{ scale: 0.8 }}
+                    >
+                      <Image
+                        src={social.imageUrl}
+                        alt=""
+                        width={100}
+                        height={24}
+                        priority
+                      />
+                    </motion.div>
                   </a>
                 ))}
-              </div>
+              </motion.div>
             </div>
-          </div>
-        </div>
-      </div>
+          </motion.div>
+        </motion.div>
+      </motion.div>
     </>
   );
-}
+};
 
 export default Home;
