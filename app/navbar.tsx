@@ -25,6 +25,12 @@ const Navbar = () => {
             Projects
           </Link>
           <Link
+            href="/work"
+            className="inline-block px-4 py-2 font-medium text-lg text-gray-700 hover:text-blue-500"
+          >
+            Work Experience
+          </Link>
+          <Link
             href="/documents/Fulkerson_John_Resume.pdf"
             className="inline-block px-4 py-2 font-medium text-lg text-gray-700 hover:text-blue-500"
           >
