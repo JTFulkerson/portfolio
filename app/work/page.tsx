@@ -16,10 +16,18 @@ const Jobs = () => {
         {
             companyLogoUrl: "/images/fcps-minimal-logo.png",
             companyName: "Fairfax County Public Schools, McLean, VA",
-            jobTitle: "Student Technician event Event Technician",
-            jobDuration: "October 2019 - Present",
+            jobTitle: "Event Service Technician",
+            jobDuration: "August 2022 - Present",
             jobDescription:
-                "Worked as a technician managing spaces while groups rented out FCPS spaces. Was mainly in charge of designing and executing sounds and lights equipment however we I was also in charge of general tech support or equipment rental setups.",
+                "As an experienced Event Service Technician, I specialize in providing reliable and efficient technological support for schools within the Fairfax County Public School system. I have extensive expertise in live audio, lighting, and streaming services, which enables me to ensure that all technical aspects of events run smoothly. Additionally, I am adept at supporting teacher and faculty trainings by providing seamless laptop and projection support. I am skilled at quickly identifying and resolving technical issues, which allows me to provide the best possible support. With my strong attention to detail and excellent communication skills, I ensure that all stakeholders are kept informed and satisfied with the services I provide.",
+        },
+        {
+            companyLogoUrl: "/images/fcps-minimal-logo.png",
+            companyName: "Fairfax County Public Schools, McLean, VA",
+            jobTitle: "Student Technician",
+            jobDuration: "October 2019 - August 2022",
+            jobDescription:
+                "As a student technician in high school, I was responsible for providing live sound and lighting support for various events held within the school. Additionally, I managed the spaces used for events and acted as the main point of contact between the event coordinators and the school while the event was takign place. With my strong attention to detail and ability to work well under pressure, I ensured that all technical aspects of the events ran smoothly. Through my work as a student technician, I gained valuable experience in event management and technical support, which has prepared me for future opportunities in this field."
         },
     ];
 
@@ -44,10 +52,10 @@ const Jobs = () => {
                     {jobs.map((job) => (
                         <motion.div
                             key={job.jobTitle}
-                            className="bg-white rounded-lg shadow-md p-8 flex items-center space-x-8"
+                            className="bg-white rounded-lg shadow-md p-8 flex flex-col sm:flex-row items-center space-x-8"
                             variants={variants}
                         >
-                            <div className="flex-shrink-0">
+                            <div className="sm:flex-shrink-0 sm:mb-0 mb-4">
                                 <Image
                                     src={job.companyLogoUrl}
                                     alt={job.companyName}
