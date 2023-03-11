@@ -8,7 +8,7 @@ const Navbar = () => {
     <header className="bg-white p-6 shadow">
       <div className="flex items-center justify-between max-w-5xl mx-auto">
         <h1 className="text-xl font-bold"> </h1>
-        <nav className="hidden md:block md:flex md:items-center md:w-auto">
+        <nav className="hidden md:flex md:items-center md:w-auto">
           <div className="flex flex-col md:flex-row md:items-center">
             <Link href="/" passHref>
               <span className="inline-block px-4 py-2 font-medium text-lg text-gray-700 hover:text-blue-500">
