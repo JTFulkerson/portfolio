@@ -120,7 +120,7 @@ const Home = () => {
                         src={social.imageUrl}
                         alt=""
                         width={100}
-                        height={24}
+                        height={100}
                         priority
                       />
                     </motion.div>

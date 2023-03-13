@@ -1,6 +1,4 @@
 "use client";
-import Head from "next/head";
-import Image from "next/image";
 import Navbar from "../navbar";
 import { motion } from "framer-motion";
 
@@ -39,7 +37,7 @@ const About = () => {
         <>
             <Navbar />
             <div className="max-w-6xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
                     <motion.div
                         className="p-4 shadow-lg rounded-lg"
                         variants={variants}
@@ -62,7 +60,7 @@ const About = () => {
                         key="hobbies"
                     >
                         <h1 className="text-2xl font-bold mb-4">Hobbies</h1>
-                        <div className="grid grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             {hobbies.map((hobby, index) => (
                                 <div className="flex items-center" key={`hobby-${index}`}>
                                     <span className="text-2xl mr-2">
@@ -82,7 +80,7 @@ const About = () => {
                         key="skills"
                     >
                         <h1 className="text-2xl font-bold mb-4">Skills</h1>
-                        <div className="grid grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             {skills.map((skill, index) => (
                                 <div className="flex items-center" key={`skill-${index}`}>
                                     <span className="text-2xl mr-2">
@@ -104,7 +102,7 @@ const About = () => {
                         key="certifications"
                     >
                         <h1 className="text-2xl font-bold mb-4">Certifications</h1>
-                        <div className="grid grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             {certifications.map((certification, index) => (
                                 <div className="flex items-center" key={`certification-${index}`}>
                                     <span className="text-2xl mr-2">
