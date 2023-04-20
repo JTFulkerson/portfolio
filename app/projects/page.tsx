@@ -17,7 +17,7 @@ const Projects = () => {
       imageUrl: "/images/meal-request-visual.png",
       title: "Custom Meal Request",
       description:
-        "This is a custom meal request command line application written in Python. Its purpose is to make the custom meal ordering process easier for those with dietary restrictions at the University of Delaware dining halls.",
+        "This is a custom meal request written in python and flask. Its purpose is to make the custom meal ordering process easier for those with dietary restrictions at the University of Delaware dining halls. The web interface is in development, working but not visually appealing.",
       link: "https://github.com/JTFulkerson/CustomMealRequest",
     },
     {
@@ -58,9 +58,9 @@ const Projects = () => {
               <Image
                 src={project.imageUrl}
                 alt={project.title}
-                className="w-full h-64 object-cover"
-                width={1000}
-                height={1000}
+                className="w-full h-64"
+                width={1624}
+                height={1056}
                 priority
               />
               <div className="p-6">
