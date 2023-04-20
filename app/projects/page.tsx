@@ -2,6 +2,7 @@
 import Image from "next/image";
 import Navbar from "../navbar";
 import { motion } from "framer-motion";
+import Head from "./head";
 
 const Projects = () => {
   const projects = [
@@ -36,6 +37,7 @@ const Projects = () => {
 
   return (
     <>
+      <Head></Head>
       <Navbar />
       <div className="max-w-6xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
         <h1 className="text-xl font-bold mb-8">My Projects</h1>
