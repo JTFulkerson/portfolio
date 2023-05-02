@@ -7,7 +7,7 @@ import Head from "./head";
 const Projects = () => {
   const projects = [
     {
-      imageUrl: "/images/timer-visual.jpg",
+      imageUrl: "/images/timer-visual.png",
       title: "Timer",
       description:
         "This is an interactive timer, originally created for the Fairfax County Public Schools School Board. It is a simple, easy to use timer that has shortcut buttons that allow the user to quickly set the timer. It is also possible to click on the timer to set the time manually.",
