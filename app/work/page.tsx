@@ -4,6 +4,7 @@ import Image from "next/image";
 import Navbar from "../navbar";
 import { motion } from "framer-motion";
 import Highlighted from "./highlighted";
+import Head from "next/head";
 
 export type Job = {
     id: number;
@@ -70,9 +71,9 @@ const Page = () => {
         <>
             <Navbar />
             <div className="max-w-6xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-                <h1 className="text-xl font-bold mb-8">My Work Experience</h1>
+                <h1 className="text-xl font-bold mb-8">Work Experience</h1>
                 <motion.div
-                    className="grid grid-cols-1 gap-8"
+                    className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
                     variants={variants}
                     initial="initial"
                     animate="animate"
@@ -81,14 +82,14 @@ const Page = () => {
                     {jobs.map((job) => (
                         <motion.div
                             key={job.title}
-                            className="bg-white rounded-lg shadow-md p-8 flex flex-col sm:flex-row items-center space-x-8"
+                            className="bg-white rounded-lg shadow-md p-8"
                             variants={variants}
                         >
                             <div className="sm:flex-shrink-0 sm:mb-0 mb-4">
                                 <Image
                                     src={job.companyLogoUrl}
                                     alt={job.companyName}
-                                    className="h-full w-full object-contain"
+                                    className="h-fit object-contain"
                                     width={150}
                                     height={150}
                                     priority
@@ -98,14 +99,13 @@ const Page = () => {
                                 <h2 className="text-lg font-bold mb-2">{job.title}</h2>
                                 <p className="text-base text-gray-600 mb-4">{job.companyName}</p>
                                 <p className="text-base text-gray-600 mb-4">{job.duration}</p>
-                                <p className="text-base text-gray-600">{job.description}</p>
+                                <button
+                                    className="w-fit rounded-md border border-transparent shadow-sm px-4 py-2 bg-gray-800 text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:text-sm"
+                                    onClick={() => handleJobClick(job)}
+                                >
+                                    View Details
+                                </button>
                             </div>
-                            <button
-                                className="inline-flex justify-center w-fit rounded-md border border-transparent shadow-sm px-4 py-2 bg-gray-800 text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:text-sm"
-                                onClick={() => handleJobClick(job)}
-                            >
-                                View Details
-                            </button>
                         </motion.div>
                     ))}
                 </motion.div>
