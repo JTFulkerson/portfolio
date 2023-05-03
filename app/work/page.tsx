@@ -28,7 +28,7 @@ const jobs: Job[] = [
         title: "Lab Assistant",
         duration: "March 2023 - Present",
         description:
-            "As a Lab Assistant, I support the day to day operations of the MakerGym through engagement with users of various experience levels, management of machine queues, administration of tool inventory, stocking of materials and other duties associated with maintaining a fabrication space. I serve in both the Physical and Digital Fabrication areas. I also assist with the development of the space, designing and implementing new processes and procedures to improve the user experience.",
+            "As a Lab Assistant, I support the day-to-day operations of the MakerGym through engagement with users of various experience levels, management of machine queues, administration of tool inventory, stocking of materials and other duties associated with maintaining a fabrication space. I serve in both the Physical and Digital Fabrication areas. I also assist with the development of the space, designing and implementing new processes and procedures to improve the user experience.",
     },
     {
         id: 2,
