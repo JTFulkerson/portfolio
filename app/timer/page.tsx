@@ -2,7 +2,7 @@
 import classnames from 'classnames';
 import React, { PropsWithChildren, useEffect, useState } from 'react';
 import useHotkeys from '@reecelucas/react-use-hotkeys';
-import Head from "next/head";
+import { useSound } from 'use-sound';
 
 type UnitOfTimeT = 'MINUTES' | 'SECONDS';
 
@@ -38,6 +38,11 @@ const Timer = () => {
         UnitOfTimeT | undefined
     >();
     const [typing, setTyping] = useState<[string, string]>(['', '']);
+    const [showMenu, setShowMenu] = useState(false);
+    const [soundEnabled, setSoundEnabled] = useState(false);
+    const [backgroundWarning, setBackgroundWarning] = useState(true);
+
+    const [play] = useSound('/sound.mp3', { volume: 100 });
 
     type ButtonProps = { className: string; onClick: () => void };
     function Button(props: PropsWithChildren<ButtonProps>) {
@@ -70,15 +75,22 @@ const Timer = () => {
             document.exitFullscreen();
         }
     });
+
+    useHotkeys('m', () => {
+        setShowMenu(!showMenu);
+    });
+
     useHotkeys(' ', () => {
         if (timer[0] || timer[1]) {
             setRunning(!isRunning);
         }
     });
+
     useHotkeys('r', () => {
         setRunning(false);
         setTimer(initTimer);
     });
+
     useHotkeys('Escape', () => {
         if (activeUnitOfTime) {
             setTyping(['', '']);
@@ -86,6 +98,7 @@ const Timer = () => {
             setActiveUnitOfTime(undefined);
         }
     });
+
     useHotkeys('Enter', () => {
         if (activeUnitOfTime) {
             setActiveUnitOfTime(undefined);
@@ -115,16 +128,34 @@ const Timer = () => {
                     setActiveUnitOfTime('SECONDS');
                 }
             } else {
-                setTyping([typing[0], newValue]);
-                if (newValue.length === 2) {
-                    setActiveUnitOfTime(undefined);
-                    setTimer([timer[0], parseInt(newValue)]);
-                    setInitTimer([timer[0], parseInt(newValue)]);
+                const newSeconds = parseInt(newValue);
+                if (newSeconds == 60) {
                     setTyping(['', '']);
+                    setTimer([timer[0] + 1, 0]);
+                    setInitTimer([timer[0] + 1, 0]);
+                    setActiveUnitOfTime(undefined);
+                } else if (newSeconds > 60) {
+                    setTyping(['', '']);
+                    setActiveUnitOfTime(undefined);
+                } else {
+                    setTyping([typing[0], newValue]);
+                    if (newValue.length === 2) {
+                        setActiveUnitOfTime(undefined);
+                        setTimer([timer[0], parseInt(newValue)]);
+                        setInitTimer([timer[0], parseInt(newValue)]);
+                        setTyping(['', '']);
+                    }
                 }
             }
         }
     });
+
+    useEffect(() => {
+        if (timer[0] === 0 && timer[1] === 0 && isRunning && soundEnabled) {
+            play();
+        }
+    }, [timer, soundEnabled, play, isRunning]);
+
     useEffect(() => {
         if (activeUnitOfTime && isRunning) {
             setRunning(false);
@@ -148,13 +179,65 @@ const Timer = () => {
 
     return (
         <>
+            <div className="relative">
+                <div className="absolute top-2 right-2">
+                    <button
+                        onClick={() => setShowMenu(!showMenu)}
+                        className="flex items-center px-3 py-2 text-white justify-end"
+                    >
+                        <svg
+                            className="w-10 h-10 fill-current"
+                            viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <title>Menu</title>
+                            <path d="M0 3h20v2H0zm0 6h20v2H0zm0 6h20v2H0z" fillRule="evenodd" />
+                        </svg>
+                    </button>
+                </div>
+                {showMenu && (
+                    <div className="menu absolute right-0 top-full h-full w-1/3 shadow-lg z-10">
+                        <div className="p-4 bg-white">
+                            <h2 className="text-lg font-medium mb-4">Timer Options</h2>
+                            <div className="grid-row-2">
+                                <div>
+                                    <input
+                                        type="checkbox"
+                                        id="sound-enabled"
+                                        checked={soundEnabled}
+                                        onChange={(e) => setSoundEnabled(e.target.checked)}
+                                        className="mr-2"
+                                    />
+                                    <label htmlFor="sound-enabled">Enable sound</label>
+                                </div>
+                                <div>
+                                    <input
+                                        type="checkbox"
+                                        id="background-warning"
+                                        checked={backgroundWarning}
+                                        onChange={(e) => setBackgroundWarning(e.target.checked)}
+                                        className="mr-2"
+                                    />
+                                    <label htmlFor="background-warning">Background Warning</label>
+                                </div>
+                            </div>
+                            <button
+                                onClick={() => setShowMenu(false)}
+                                className="bg-blue-500 text-white px-4 py-2 rounded"
+                            >
+                                Close
+                            </button>
+                        </div>
+                    </div>
+                )}
+            </div>
             <div
                 className={classnames(
                     'flex flex-col items-center justify-center gap-[3vmin] h-screen',
                     {
-                        'bg-yellow-500': timer[1] <= 10 && timer[1] > 0 && timer[0] === 0,
-                        'bg-[#8B0000]': timer[0] === 0 && timer[1] === 0,
-                        'bg-black': timer[0] !== 0 || timer[1] !== 0,
+                        'bg-yellow-500': timer[1] <= 10 && timer[1] > 0 && timer[0] === 0 && backgroundWarning,
+                        'bg-[#8B0000]': timer[0] === 0 && timer[1] === 0 && backgroundWarning,
+                        'bg-black': (timer[0] !== 0 || timer[1] !== 0 || !backgroundWarning),
                     }
                 )}
             >
@@ -244,7 +327,7 @@ const Timer = () => {
                         3:00
                     </Button>
                 </div>
-            </div>
+            </div >
         </>
     );
 };
