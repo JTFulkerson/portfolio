@@ -1,19 +1,21 @@
-export type Job = {
+export type Project = {
     id: number;
-    companyLogoUrl: string;
-    companyName: string;
+    imageUrl: string;
     title: string;
-    duration: string;
+    summary: string;
+    shownLink: string;
+    link: string;
     description: string;
+
 };
 
 type Props = {
-    jobData: Job;
+    projectData: Project;
     handleClose: () => void;
 };
 
-const Highlighted = ({ jobData, handleClose }: Props) => {
-    const { companyLogoUrl, companyName, title, duration, description } = jobData;
+const Highlighted = ({ projectData, handleClose }: Props) => {
+    const { imageUrl, title, summary, shownLink, link, description } = projectData;
 
     return (
         <div className="fixed z-50 inset-0 overflow-y-auto flex justify-center items-center">
@@ -31,8 +33,7 @@ const Highlighted = ({ jobData, handleClose }: Props) => {
                         <h3 className="text-lg font-medium leading-6 text-gray-900 mb-2">
                             {title}
                         </h3>
-                        <p className="text-sm text-gray-500 mb-2">{companyName}</p>
-                        <p className="text-sm text-gray-500">{duration}</p>
+                        <a href={link} className="text-sm text-gray-500 hover:text-blue-500">{shownLink}</a>
                         <div className="mt-4 text-base text-gray-700">{description}</div>
                         <div className="mt-5 sm:mt-6">
                             <button
