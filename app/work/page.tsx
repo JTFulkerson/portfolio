@@ -4,7 +4,6 @@ import Image from "next/image";
 import Navbar from "../navbar";
 import { motion } from "framer-motion";
 import Highlighted from "./highlighted";
-import Head from "next/head";
 
 export type Job = {
     id: number;
@@ -82,7 +81,7 @@ const Page = () => {
                     {jobs.map((job) => (
                         <motion.div
                             key={job.title}
-                            className="bg-white rounded-lg shadow-md p-8"
+                            className="bg-white rounded-lg shadow-md p-8 relative"
                             variants={variants}
                         >
                             <div className="sm:flex-shrink-0 sm:mb-0 mb-4">
@@ -98,13 +97,15 @@ const Page = () => {
                             <div className="flex-grow">
                                 <h2 className="text-lg font-bold mb-2">{job.title}</h2>
                                 <p className="text-base text-gray-600 mb-4">{job.companyName}</p>
-                                <p className="text-base text-gray-600 mb-4">{job.duration}</p>
-                                <button
-                                    className="w-fit rounded-md border border-transparent shadow-sm px-4 py-2 bg-gray-800 text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:text-sm"
-                                    onClick={() => handleJobClick(job)}
-                                >
-                                    View Details
-                                </button>
+                                <p className="text-base text-gray-600 mb-14">{job.duration}</p>
+                                <div className="flex justify-end">
+                                    <button
+                                        className="w-fit rounded-md border border-transparent shadow-sm px-4 py-2 bg-gray-800 text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:text-sm absolute bottom-0 right-0 mb-6 mr-4"
+                                        onClick={() => handleJobClick(job)}
+                                    >
+                                        View Details
+                                    </button>
+                                </div>
                             </div>
                         </motion.div>
                     ))}
@@ -116,5 +117,6 @@ const Page = () => {
         </>
     );
 };
+
 
 export default Page;
