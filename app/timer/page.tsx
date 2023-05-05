@@ -42,8 +42,13 @@ const Timer = () => {
     const [showMenu, setShowMenu] = useState(false);
     const [soundEnabled, setSoundEnabled] = useState(false);
     const [backgroundWarning, setBackgroundWarning] = useState(true);
+    const [backgroundWarningColor, setBackgroundWarningColor] = useState("#EAB308");
+    const [backgroundStopColor, setBackgroundStopColor] = useState("#8B0000");
+    const [currentBackgroundColor, setCurrentBackgroundColor] = useState("#000000");
 
     const [play] = useSound('/sounds/time-up.mp3', { volume: 0.25 });
+
+    console.log("backgroundWarningColor: " + backgroundWarningColor);
 
     type ButtonProps = { className: string; onClick: () => void };
     function Button(props: PropsWithChildren<ButtonProps>) {
@@ -240,6 +245,26 @@ const Timer = () => {
                                             />
                                             <label htmlFor="background-warning">Background Warning</label>
                                         </div>
+                                        <div className="flex items-center">
+                                            <input
+                                                type="color"
+                                                value={backgroundWarningColor}
+                                                id="background-warning-color"
+                                                onChange={(e) => setBackgroundWarningColor(e.target.value)}
+                                                className="bg-white"
+                                            />
+                                            <label htmlFor="background-warning-color">Background Warning Color:</label>
+                                        </div>
+                                        <div className="flex items-center">
+                                            <input
+                                                type="color"
+                                                value={backgroundStopColor}
+                                                id="background-stop-color"
+                                                onChange={(e) => setBackgroundStopColor(e.target.value)}
+                                                className=""
+                                            />
+                                            <label htmlFor="background-stop-color">Background Stop Color:</label>
+                                        </div>
                                     </div>
                                 </div>
                             </menu>
@@ -252,8 +277,8 @@ const Timer = () => {
                 className={classnames(
                     'flex flex-col items-center justify-center gap-[3vmin] h-screen',
                     {
-                        'bg-yellow-500': timer[1] <= 10 && timer[1] > 0 && timer[0] === 0 && backgroundWarning,
-                        'bg-[#8B0000]': timer[0] === 0 && timer[1] === 0 && backgroundWarning,
+                        [`bg-[${backgroundWarningColor}]`]: timer[1] <= 10 && timer[1] > 0 && timer[0] === 0 && backgroundWarning,
+                        [`bg-[${backgroundStopColor}]`]: timer[0] === 0 && timer[1] === 0 && backgroundWarning,
                         'bg-black': (timer[0] !== 0 || timer[1] !== 0 || !backgroundWarning),
                     }
                 )}
