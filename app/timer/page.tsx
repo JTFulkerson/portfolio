@@ -3,6 +3,7 @@ import classnames from 'classnames';
 import React, { PropsWithChildren, useEffect, useState } from 'react';
 import useHotkeys from '@reecelucas/react-use-hotkeys';
 import { useSound } from 'use-sound';
+import { AnimatePresence, motion } from 'framer-motion';
 
 type UnitOfTimeT = 'MINUTES' | 'SECONDS';
 
@@ -42,7 +43,7 @@ const Timer = () => {
     const [soundEnabled, setSoundEnabled] = useState(false);
     const [backgroundWarning, setBackgroundWarning] = useState(true);
 
-    const [play] = useSound('/sound.mp3', { volume: 100 });
+    const [play] = useSound('/sounds/time-up.mp3', { volume: 0.25 });
 
     type ButtonProps = { className: string; onClick: () => void };
     function Button(props: PropsWithChildren<ButtonProps>) {
@@ -195,41 +196,57 @@ const Timer = () => {
                         </svg>
                     </button>
                 </div>
-                {showMenu && (
-                    <div className="menu absolute right-0 top-full h-full w-1/3 shadow-lg z-10">
-                        <div className="p-4 bg-white">
-                            <h2 className="text-lg font-medium mb-4">Timer Options</h2>
-                            <div className="grid-row-2">
-                                <div>
-                                    <input
-                                        type="checkbox"
-                                        id="sound-enabled"
-                                        checked={soundEnabled}
-                                        onChange={(e) => setSoundEnabled(e.target.checked)}
-                                        className="mr-2"
-                                    />
-                                    <label htmlFor="sound-enabled">Enable sound</label>
+                <AnimatePresence>
+                    {showMenu && (
+                        <motion.div
+                            className="from-right"
+                            initial="hidden"
+                            animate="visible"
+                            exit="hidden"
+                            variants={{
+                                hidden: {
+                                    opacity: 0,
+                                    x: 50
+                                },
+                                visible: {
+                                    opacity: 1,
+                                    x: 5,
+                                    transition: { duration: .25, ease: "easeOut" }
+                                }
+                            }}
+                        >
+                            <menu className="menu absolute h-screen bottom-0 right-0 top-20 w-[20] shadow-lg z-10">
+                                <div className="p-4 bg-white">
+                                    <h2 className="text-lg font-medium mb-4">Timer Options</h2>
+
+                                    <div>
+                                        <div>
+                                            <input
+                                                type="checkbox"
+                                                id="sound-enabled"
+                                                checked={soundEnabled}
+                                                onChange={(e) => setSoundEnabled(e.target.checked)}
+                                                className="mr-2"
+                                            />
+                                            <label htmlFor="sound-enabled">Enable sound</label>
+                                        </div>
+                                        <div>
+                                            <input
+                                                type="checkbox"
+                                                id="background-warning"
+                                                checked={backgroundWarning}
+                                                onChange={(e) => setBackgroundWarning(e.target.checked)}
+                                                className="mr-2"
+                                            />
+                                            <label htmlFor="background-warning">Background Warning</label>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div>
-                                    <input
-                                        type="checkbox"
-                                        id="background-warning"
-                                        checked={backgroundWarning}
-                                        onChange={(e) => setBackgroundWarning(e.target.checked)}
-                                        className="mr-2"
-                                    />
-                                    <label htmlFor="background-warning">Background Warning</label>
-                                </div>
-                            </div>
-                            <button
-                                onClick={() => setShowMenu(false)}
-                                className="bg-blue-500 text-white px-4 py-2 rounded"
-                            >
-                                Close
-                            </button>
-                        </div>
-                    </div>
-                )}
+                            </menu>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+
             </div>
             <div
                 className={classnames(
