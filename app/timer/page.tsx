@@ -215,7 +215,7 @@ const Timer = () => {
                                 }
                             }}
                         >
-                            <menu className="menu absolute h-screen bottom-0 right-0 top-20 w-[20] shadow-lg z-10">
+                            <menu className="menu absolute bottom-0 right-0 top-20 w-[20] shadow-lg z-10">
                                 <div className="p-4 bg-white">
                                     <h2 className="text-lg font-medium mb-4">Timer Options</h2>
 
