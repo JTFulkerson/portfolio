@@ -45,6 +45,7 @@ const Timer = () => {
     const [backgroundColor, setBackgroundColor] = useState("#000000");
     const [backgroundWarningColor, setBackgroundWarningColor] = useState("#EAB308");
     const [backgroundStopColor, setBackgroundStopColor] = useState("#8B0000");
+    const [textColor, setTextColor] = useState("#FFFFFF");
 
     const [play] = useSound('/sounds/time-up.mp3', { volume: 0.25 });
 
@@ -54,9 +55,10 @@ const Timer = () => {
             <div
                 tabIndex={-1}
                 className={classnames(
-                    'text-white/80 bg-white/10 leading-10 rounded-[1vmin] border-none outline-none flex flex-col text-center justify-center cursor-pointer hover:bg-white/40',
+                    ' bg-white/10 leading-10 rounded-[1vmin] border-none outline-none flex flex-col text-center justify-center cursor-pointer hover:bg-white/40',
                     props.className
                 )}
+                style={{ color: textColor }}
                 onClick={(event) => {
                     props.onClick();
                     if (activeUnitOfTime) {
@@ -271,6 +273,16 @@ const Timer = () => {
                                             <div className="flex items-center">
                                                 <input
                                                     type="color"
+                                                    value={textColor}
+                                                    id="text-color"
+                                                    onChange={(e) => setTextColor(e.target.value)}
+                                                    className="bg-white"
+                                                />
+                                                <label htmlFor="text-color">Text Color</label>
+                                            </div>
+                                            <div className="flex items-center pb-5">
+                                                <input
+                                                    type="color"
                                                     value={backgroundColor}
                                                     id="background-color"
                                                     onChange={(e) => setBackgroundColor(e.target.value)}
@@ -278,6 +290,17 @@ const Timer = () => {
                                                 />
                                                 <label htmlFor="background-color">Background Color</label>
                                             </div>
+                                            <button
+                                                className=' bg-slate-300 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center'
+                                                onClick={() => {
+                                                    setTextColor('#FFFFFF');
+                                                    setBackgroundColor('#000000');
+                                                    setBackgroundWarningColor('#EAB308');
+                                                    setBackgroundStopColor('#8B0000');
+                                                }}
+                                            >
+                                                Defaults
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -302,7 +325,8 @@ const Timer = () => {
                             : backgroundColor,
                 }}
             >
-                <p className="text-white font-bold text-[44vmin]">
+                <p className="font-bold text-[44vmin]"
+                    style={{ color: textColor }}>
                     <UnitOfTime
                         value={timer[0]}
                         typing={typing[0]}
@@ -334,7 +358,7 @@ const Timer = () => {
                             }
                         }}
                     >
-                        {isRunning ? 'pause' : 'start'}
+                        {isRunning ? 'stop' : 'start'}
                     </Button>
                     <Button
                         className="text-[8vmin] h-[12vmin] w-[24vmin]"
