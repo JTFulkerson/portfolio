@@ -42,6 +42,7 @@ const Timer = () => {
     const [showMenu, setShowMenu] = useState(false);
     const [soundEnabled, setSoundEnabled] = useState(false);
     const [backgroundWarning, setBackgroundWarning] = useState(true);
+    const [backgroundColor, setBackgroundColor] = useState("#000000");
     const [backgroundWarningColor, setBackgroundWarningColor] = useState("#EAB308");
     const [backgroundStopColor, setBackgroundStopColor] = useState("#8B0000");
 
@@ -183,7 +184,7 @@ const Timer = () => {
     return (
         <>
             <div className="relative">
-                <div className="absolute top-2 right-2">
+                <div className="absolute top-2 right-0">
                     <button
                         onClick={() => setShowMenu(!showMenu)}
                         className="flex items-center px-3 py-2 text-white justify-end"
@@ -193,7 +194,7 @@ const Timer = () => {
                             viewBox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg"
                         >
-                            <title>Menu</title>
+                            <title>Timer Options</title>
                             <path d="M0 3h20v2H0zm0 6h20v2H0zm0 6h20v2H0z" fillRule="evenodd" />
                         </svg>
                     </button>
@@ -217,7 +218,7 @@ const Timer = () => {
                                 }
                             }}
                         >
-                            <menu className="menu absolute bottom-0 right-0 top-20 w-[20] shadow-lg z-10">
+                            <menu className="menu absolute bottom-0 right-0 top-20 w-[300px] shadow-lg z-10">
                                 <div className="p-4 bg-white outline drop-shadow-lg rounded-md">
                                     <h2 className="text-lg font-medium mb-4">Timer Options</h2>
 
@@ -242,25 +243,41 @@ const Timer = () => {
                                             />
                                             <label htmlFor="background-warning">Background Warning</label>
                                         </div>
-                                        <div className="flex items-center">
-                                            <input
-                                                type="color"
-                                                value={backgroundWarningColor}
-                                                id="background-warning-color"
-                                                onChange={(e) => setBackgroundWarningColor(e.target.value)}
-                                                className="bg-white"
-                                            />
-                                            <label htmlFor="background-warning-color">Background Warning Color</label>
-                                        </div>
-                                        <div className="flex items-center">
-                                            <input
-                                                type="color"
-                                                value={backgroundStopColor}
-                                                id="background-stop-color"
-                                                onChange={(e) => setBackgroundStopColor(e.target.value)}
-                                                className="bg-white"
-                                            />
-                                            <label htmlFor="background-stop-color">Background Stop Color</label>
+                                        {backgroundWarning && (
+                                            <div>
+                                                <div className="flex items-center">
+                                                    <input
+                                                        type="color"
+                                                        value={backgroundWarningColor}
+                                                        id="background-warning-color"
+                                                        onChange={(e) => setBackgroundWarningColor(e.target.value)}
+                                                        className="bg-white"
+                                                    />
+                                                    <label htmlFor="background-warning-color">Background Warning Color</label>
+                                                </div>
+                                                <div className="flex items-center">
+                                                    <input
+                                                        type="color"
+                                                        value={backgroundStopColor}
+                                                        id="background-stop-color"
+                                                        onChange={(e) => setBackgroundStopColor(e.target.value)}
+                                                        className="bg-white"
+                                                    />
+                                                    <label htmlFor="background-stop-color">Background Stop Color</label>
+                                                </div>
+                                            </div>
+                                        )}
+                                        <div>
+                                            <div className="flex items-center">
+                                                <input
+                                                    type="color"
+                                                    value={backgroundColor}
+                                                    id="background-color"
+                                                    onChange={(e) => setBackgroundColor(e.target.value)}
+                                                    className="bg-white"
+                                                />
+                                                <label htmlFor="background-color">Background Color</label>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -271,14 +288,19 @@ const Timer = () => {
 
             </div>
             <div
-                className={classnames(
-                    `flex flex-col items-center justify-center gap-[3vmin] h-screen`,
-                    {
-                        [`bg-[${backgroundWarningColor}]`]: timer[1] <= 10 && timer[1] > 0 && timer[0] === 0 && backgroundWarning,
-                        [`bg-[${backgroundStopColor}]`]: timer[0] === 0 && timer[1] === 0 && backgroundWarning,
-                        'bg-black': timer[0] > 0 || timer[1] > 10,
-                    }
-                )}
+                style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '3vmin',
+                    height: '100vh',
+                    backgroundColor: timer[1] <= 10 && timer[1] > 0 && timer[0] === 0 && backgroundWarning
+                        ? backgroundWarningColor
+                        : timer[0] === 0 && timer[1] === 0 && backgroundWarning
+                            ? backgroundStopColor
+                            : backgroundColor,
+                }}
             >
                 <p className="text-white font-bold text-[44vmin]">
                     <UnitOfTime
