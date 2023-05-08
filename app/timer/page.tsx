@@ -183,6 +183,43 @@ const Timer = () => {
         }
     }, [isRunning, timer]);
 
+
+    interface TimerButtonProps {
+        text: string;
+        time: [number, number];
+    }
+
+    const timerButtons: TimerButtonProps[] = [
+        {
+            text: "1:00",
+            time: [1, 0],
+        },
+        {
+            text: "1:30",
+            time: [1, 30],
+        },
+        {
+            text: "2:00",
+            time: [2, 0],
+        },
+        {
+            text: "3:00",
+            time: [3, 0],
+        },
+    ];
+
+    function TimerButtons() {
+        const [timer, setTimer] = useState<[number, number]>([0, 0]);
+        const [initTimer, setInitTimer] = useState<[number, number]>([0, 0]);
+        const [running, setRunning] = useState<boolean>(false);
+    }
+
+    const handleButtonClick = (time: [number, number]) => {
+        setTimer(time);
+        setInitTimer(time);
+        setRunning(false);
+    };
+
     return (
         <>
             <div className="relative">
@@ -371,46 +408,15 @@ const Timer = () => {
                     </Button>
                 </div>
                 <div className="flex flex-row gap-[3vmin]">
-                    <Button
-                        className="text-[5vmin] h-[10vmin] w-[16vmin]"
-                        onClick={() => {
-                            setTimer([1, 0]);
-                            setInitTimer([1, 0]);
-                            setRunning(false);
-                        }}
-                    >
-                        1:00
-                    </Button>
-                    <Button
-                        className="text-[5vmin] h-[10vmin] w-[16vmin]"
-                        onClick={() => {
-                            setTimer([1, 30]);
-                            setInitTimer([1, 30]);
-                            setRunning(false);
-                        }}
-                    >
-                        1:30
-                    </Button>
-                    <Button
-                        className="text-[5vmin] h-[10vmin] w-[16vmin]"
-                        onClick={() => {
-                            setTimer([2, 0]);
-                            setInitTimer([2, 0]);
-                            setRunning(false);
-                        }}
-                    >
-                        2:00
-                    </Button>
-                    <Button
-                        className="text-[5vmin] h-[10vmin] w-[16vmin]"
-                        onClick={() => {
-                            setTimer([3, 0]);
-                            setInitTimer([3, 0]);
-                            setRunning(false);
-                        }}
-                    >
-                        3:00
-                    </Button>
+                    {timerButtons.map(({ text, time }) => (
+                        <Button
+                            key={text}
+                            className="text-[5vmin] h-[10vmin] w-[16vmin]"
+                            onClick={() => handleButtonClick(time)}
+                        >
+                            {text}
+                        </Button>
+                    ))}
                 </div>
             </div >
         </>
