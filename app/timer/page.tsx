@@ -50,6 +50,12 @@ const Timer = () => {
 
   const [play] = useSound("/sounds/time-up.mp3", { volume: 0.25 });
 
+  const [hideButtons, setHideButtons] = useState(false);
+
+  const toggleButtonsVisibility = () => {
+    setHideButtons(!hideButtons);
+  };
+
   type ButtonProps = { className: string; onClick: () => void };
   function Button(props: PropsWithChildren<ButtonProps>) {
     return (
@@ -85,6 +91,10 @@ const Timer = () => {
 
   useHotkeys("m", () => {
     setShowMenu(!showMenu);
+  });
+
+  useHotkeys("h", () => {
+    toggleButtonsVisibility();
   });
 
   useHotkeys(" ", () => {
@@ -375,7 +385,13 @@ const Timer = () => {
               : backgroundColor,
         }}
       >
-        <p className="font-bold text-[44vmin]" style={{ color: textColor }}>
+        <p
+          className={`font-bold text-[44vmin] ${
+            hideButtons ? "text-[55vmin]" : ""
+          }`}
+          style={{ color: textColor }}
+        >
+          {" "}
           <UnitOfTime
             value={timer[0]}
             typing={typing[0]}
@@ -398,43 +414,51 @@ const Timer = () => {
             }}
           />
         </p>
-        <div className="flex flex-row gap-[3vmin]">
-          <Button
-            className="text-[8vmin] h-[12vmin] w-[24vmin]"
-            onClick={() => {
-              if (timer[0] || timer[1]) {
-                setRunning(!isRunning);
-              }
-              const newMinute =
-                typing[0].length === 0 ? timer[0] : parseInt(typing[0]);
-              const newSeconds =
-                typing[1].length === 0 ? timer[1] : parseInt(typing[1]);
-              setInitTimer([newMinute, newSeconds]);
-            }}
+        <>
+          <div
+            className="flex flex-row gap-[3vmin]"
+            style={{ visibility: hideButtons ? "hidden" : "visible" }}
           >
-            {isRunning ? "stop" : "start"}
-          </Button>
-          <Button
-            className="text-[8vmin] h-[12vmin] w-[24vmin]"
-            onClick={() => {
-              setRunning(false);
-              setTimer(initTimer);
-            }}
-          >
-            reset
-          </Button>
-        </div>
-        <div className="flex flex-row gap-[3vmin]">
-          {timerButtons.map(({ text, time }) => (
             <Button
-              key={text}
-              className="text-[5vmin] h-[10vmin] w-[16vmin]"
-              onClick={() => handleButtonClick(time)}
+              className="text-[8vmin] h-[12vmin] w-[24vmin]"
+              onClick={() => {
+                if (timer[0] || timer[1]) {
+                  setRunning(!isRunning);
+                }
+                const newMinute =
+                  typing[0].length === 0 ? timer[0] : parseInt(typing[0]);
+                const newSeconds =
+                  typing[1].length === 0 ? timer[1] : parseInt(typing[1]);
+                setInitTimer([newMinute, newSeconds]);
+              }}
             >
-              {text}
+              {isRunning ? "stop" : "start"}
             </Button>
-          ))}
-        </div>
+            <Button
+              className="text-[8vmin] h-[12vmin] w-[24vmin]"
+              onClick={() => {
+                setRunning(false);
+                setTimer(initTimer);
+              }}
+            >
+              reset
+            </Button>
+          </div>
+          <div
+            className="flex flex-row gap-[3vmin]"
+            style={{ visibility: hideButtons ? "hidden" : "visible" }}
+          >
+            {timerButtons.map(({ text, time }) => (
+              <Button
+                key={text}
+                className="text-[5vmin] h-[10vmin] w-[16vmin]"
+                onClick={() => handleButtonClick(time)}
+              >
+                {text}
+              </Button>
+            ))}
+          </div>
+        </>
       </div>
     </>
   );
