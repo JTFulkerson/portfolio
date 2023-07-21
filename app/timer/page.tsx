@@ -228,24 +228,26 @@ const Timer = () => {
   return (
     <>
       <div className="relative">
-        <div className="absolute top-2 right-0">
-          <button
-            onClick={() => setShowMenu(!showMenu)}
-            className="flex items-center px-3 py-2 text-white justify-end"
-          >
-            <svg
-              className="w-10 h-10 fill-current"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
+        {!hideButtons ? (
+          <div className="absolute top-2 right-0">
+            <button
+              onClick={() => setShowMenu(!showMenu)}
+              className="flex items-center px-3 py-2 text-white justify-end"
             >
-              <title>Timer Options</title>
-              <path
-                d="M0 3h20v2H0zm0 6h20v2H0zm0 6h20v2H0z"
-                fillRule="evenodd"
-              />
-            </svg>
-          </button>
-        </div>
+              <svg
+                className="w-10 h-10 fill-current"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <title>Timer Options</title>
+                <path
+                  d="M0 3h20v2H0zm0 6h20v2H0zm0 6h20v2H0z"
+                  fillRule="evenodd"
+                />
+              </svg>
+            </button>
+          </div>
+        ) : null}
         <AnimatePresence>
           {showMenu && (
             <motion.div
@@ -414,51 +416,53 @@ const Timer = () => {
             }}
           />
         </p>
-        <>
-          <div
-            className="flex flex-row gap-[3vmin]"
-            style={{ visibility: hideButtons ? "hidden" : "visible" }}
-          >
-            <Button
-              className="text-[8vmin] h-[12vmin] w-[24vmin]"
-              onClick={() => {
-                if (timer[0] || timer[1]) {
-                  setRunning(!isRunning);
-                }
-                const newMinute =
-                  typing[0].length === 0 ? timer[0] : parseInt(typing[0]);
-                const newSeconds =
-                  typing[1].length === 0 ? timer[1] : parseInt(typing[1]);
-                setInitTimer([newMinute, newSeconds]);
-              }}
+        {hideButtons ? null : (
+          <>
+            <div
+              className="flex flex-row gap-[3vmin]"
+              style={{ visibility: hideButtons ? "hidden" : "visible" }}
             >
-              {isRunning ? "stop" : "start"}
-            </Button>
-            <Button
-              className="text-[8vmin] h-[12vmin] w-[24vmin]"
-              onClick={() => {
-                setRunning(false);
-                setTimer(initTimer);
-              }}
-            >
-              reset
-            </Button>
-          </div>
-          <div
-            className="flex flex-row gap-[3vmin]"
-            style={{ visibility: hideButtons ? "hidden" : "visible" }}
-          >
-            {timerButtons.map(({ text, time }) => (
               <Button
-                key={text}
-                className="text-[5vmin] h-[10vmin] w-[16vmin]"
-                onClick={() => handleButtonClick(time)}
+                className="text-[8vmin] h-[12vmin] w-[24vmin]"
+                onClick={() => {
+                  if (timer[0] || timer[1]) {
+                    setRunning(!isRunning);
+                  }
+                  const newMinute =
+                    typing[0].length === 0 ? timer[0] : parseInt(typing[0]);
+                  const newSeconds =
+                    typing[1].length === 0 ? timer[1] : parseInt(typing[1]);
+                  setInitTimer([newMinute, newSeconds]);
+                }}
               >
-                {text}
+                {isRunning ? "stop" : "start"}
               </Button>
-            ))}
-          </div>
-        </>
+              <Button
+                className="text-[8vmin] h-[12vmin] w-[24vmin]"
+                onClick={() => {
+                  setRunning(false);
+                  setTimer(initTimer);
+                }}
+              >
+                reset
+              </Button>
+            </div>
+            <div
+              className="flex flex-row gap-[3vmin]"
+              style={{ visibility: hideButtons ? "hidden" : "visible" }}
+            >
+              {timerButtons.map(({ text, time }) => (
+                <Button
+                  key={text}
+                  className="text-[5vmin] h-[10vmin] w-[16vmin]"
+                  onClick={() => handleButtonClick(time)}
+                >
+                  {text}
+                </Button>
+              ))}
+            </div>
+          </>
+        )}
       </div>
     </>
   );
