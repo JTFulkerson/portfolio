@@ -124,18 +124,19 @@ const Timer = () => {
   });
 
   useHotkeys(["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"], (event) => {
+    const currentValue = activeUnitOfTime === "MINUTES" ? typing[0] : typing[1];
+    const newValue = `${currentValue}${event.key}`.slice(-2);
     if (activeUnitOfTime) {
-      const currentValue =
-        activeUnitOfTime === "MINUTES" ? typing[0] : typing[1];
-      const newValue = `${currentValue}${event.key}`.slice(-2);
       if (activeUnitOfTime === "MINUTES") {
         setTyping([newValue, typing[1]]);
         if (newValue.length === 2) {
           setTimer([parseInt(newValue), timer[1]]);
+          setInitTimer([parseInt(newValue), timer[1]]);
           setActiveUnitOfTime("SECONDS");
         }
       } else {
-        const newSeconds = parseInt(newValue);
+        const newSeconds =
+          typing[1].length === 0 ? timer[1] : parseInt(typing[1]);
         if (newSeconds == 60) {
           setTyping(["", ""]);
           setTimer([timer[0] + 1, 0]);
