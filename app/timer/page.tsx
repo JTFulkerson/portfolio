@@ -208,12 +208,6 @@ const Timer = () => {
     },
   ];
 
-  function TimerButtons() {
-    const [timer, setTimer] = useState<[number, number]>([0, 0]);
-    const [initTimer, setInitTimer] = useState<[number, number]>([0, 0]);
-    const [running, setRunning] = useState<boolean>(false);
-  }
-
   const handleButtonClick = (time: [number, number]) => {
     setTimer(time);
     setInitTimer(time);
@@ -410,6 +404,11 @@ const Timer = () => {
               if (timer[0] || timer[1]) {
                 setRunning(!isRunning);
               }
+              const newMinute =
+                typing[0].length === 0 ? timer[0] : parseInt(typing[0]);
+              const newSeconds =
+                typing[1].length === 0 ? timer[1] : parseInt(typing[1]);
+              setInitTimer([newMinute, newSeconds]);
             }}
           >
             {isRunning ? "stop" : "start"}
