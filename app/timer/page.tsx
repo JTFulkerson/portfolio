@@ -95,6 +95,7 @@ const Timer = () => {
 
   useHotkeys("h", () => {
     toggleButtonsVisibility();
+    setShowMenu(false);
   });
 
   useHotkeys(" ", () => {
