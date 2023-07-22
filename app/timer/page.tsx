@@ -1,6 +1,7 @@
 "use client";
 import classnames from "classnames";
 import React, { PropsWithChildren, useEffect, useState } from "react";
+import { useLocalStorage } from "usehooks-ts";
 import useHotkeys from "@reecelucas/react-use-hotkeys";
 import { useSound } from "use-sound";
 import { AnimatePresence, motion } from "framer-motion";
@@ -40,8 +41,14 @@ const Timer = () => {
   >();
   const [typing, setTyping] = useState<[string, string]>(["", ""]);
   const [showMenu, setShowMenu] = useState(false);
-  const [soundEnabled, setSoundEnabled] = useState(false);
-  const [backgroundWarning, setBackgroundWarning] = useState(true);
+  const [soundEnabled, setSoundEnabled] = useLocalStorage(
+    "soundEnabled",
+    false
+  );
+  const [backgroundWarning, setBackgroundWarning] = useLocalStorage(
+    "backgroundWarning",
+    true
+  );
   const [backgroundColor, setBackgroundColor] = useState("#000000");
   const [backgroundWarningColor, setBackgroundWarningColor] =
     useState("#EAB308");
@@ -352,7 +359,9 @@ const Timer = () => {
                       <button
                         className=" bg-slate-300 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center"
                         onClick={() => {
+                          setSoundEnabled(false);
                           setTextColor("#FFFFFF");
+                          setBackgroundWarning(true);
                           setBackgroundColor("#000000");
                           setBackgroundWarningColor("#EAB308");
                           setBackgroundStopColor("#8B0000");
