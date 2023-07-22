@@ -271,7 +271,6 @@ const Timer = () => {
               <menu className="menu absolute bottom-0 right-0 top-20 w-[300px] shadow-lg z-10">
                 <div className="p-4 bg-white outline drop-shadow-lg rounded-md">
                   <h2 className="text-lg font-medium mb-4">Timer Options</h2>
-
                   <div>
                     <div>
                       <input
@@ -359,9 +358,17 @@ const Timer = () => {
                           setBackgroundStopColor("#8B0000");
                         }}
                       >
-                        Defaults
+                        Restore Defaults
                       </button>
                     </div>
+                  </div>
+                  <div className="outline mt-4 mb-4 p-4 rounded-md">
+                    <h2 className="text-lg font-medium">Keyboard Shortcuts</h2>
+                    <p>F - Fullscreen</p>
+                    <p>M - Menu</p>
+                    <p>H - Hide Buttons</p>
+                    <p>R - Reset</p>
+                    <p>Space - Start/Stop</p>
                   </div>
                 </div>
               </menu>
