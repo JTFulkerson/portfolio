@@ -49,7 +49,10 @@ const Timer = () => {
     "backgroundWarning",
     true
   );
-  const [backgroundColor, setBackgroundColor] = useState("#000000");
+  const [backgroundColor, setBackgroundColor] = useLocalStorage(
+    "backgroundColor",
+    "#000000"
+  );
   const [backgroundWarningColor, setBackgroundWarningColor] =
     useState("#EAB308");
   const [backgroundStopColor, setBackgroundStopColor] = useState("#8B0000");
