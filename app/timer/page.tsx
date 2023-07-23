@@ -190,15 +190,24 @@ const Timer = () => {
 
   useEffect(() => {
     if (isRunning) {
+      const startTime = new Date();
+
       const interval = setInterval(() => {
-        if (timer[0] === 0 && timer[1] === 0) {
+        const currentTime = new Date();
+        const timeDiff = Math.floor(
+          (currentTime.getTime() - startTime.getTime()) / 1000
+        );
+
+        if (timeDiff >= timer[0] * 60 + timer[1]) {
           setRunning(false);
-        } else if (timer[1] === 0) {
-          setTimer([timer[0] - 1, 59]);
         } else {
-          setTimer([timer[0], timer[1] - 1]);
+          const remainingSeconds = timer[0] * 60 + timer[1] - timeDiff;
+          const minutes = Math.floor(remainingSeconds / 60);
+          const seconds = remainingSeconds % 60;
+          setTimer([minutes, seconds]);
         }
       }, 1000);
+
       return () => clearInterval(interval);
     }
   }, [isRunning, timer]);
