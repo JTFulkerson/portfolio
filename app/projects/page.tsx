@@ -22,7 +22,18 @@ type Props = {
 
 const projects: Project[] = [
   {
-    id: 1,
+    id: 997,
+    imageUrl: "/images/personalized-plates-dashboard.png",
+    title: "Personalized Plates",
+    summary:
+      "A full stack application that eases the use for those with dietary restrictions to order meals within dining halls for Universities. ",
+    shownLink: "https://order-a-meal.vercel.app/",
+    link: "https://order-a-meal.vercel.app/",
+    description:
+      "The goal of Personalized Plates is to create a personalized meal ordering system for university dining halls. This is a full stack application that uses React, Next.js, and Tailwind CSS for the front end, and Prisma w/ Postgresql for the backend. The application is currently in development, and is not yet ready for use.",
+  },
+  {
+    id: 998,
     imageUrl: "/images/timer-visual.png",
     title: "Timer",
     summary:
@@ -33,7 +44,7 @@ const projects: Project[] = [
       "This is an interactive timer, originally created for the Fairfax County Public Schools School Board. It is a simple, easy to use timer that has shortcut buttons that allow the user to quickly set the timer. It is also possible to click on the timer to set the time manually.",
   },
   {
-    id: 2,
+    id: 999,
     imageUrl: "/images/meal-request-visual.png",
     title: "Custom Meal Request",
     summary:
@@ -44,7 +55,7 @@ const projects: Project[] = [
       "This is a custom meal request written in python and flask. Its purpose is to make the custom meal ordering process easier for those with dietary restrictions at the University of Delaware dining halls. The web interface is in development, working but not visually appealing.",
   },
   {
-    id: 3,
+    id: 1000,
     imageUrl: "/images/wordle-visual.png",
     title: "Wordle",
     summary:
