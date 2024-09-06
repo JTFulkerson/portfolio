@@ -22,12 +22,32 @@ type Props = {
 
 const jobs: Job[] = [
   {
+    id: 995,
+    companyLogoUrl: "/images/aq-logo.png",
+    location: "Tortola, British Virgin Islands",
+    companyName: "ActionQuest",
+    title: "Dive Instructor",
+    duration: "June 7, 2024 - July 29, 2024",
+    description:
+      "As a Dive Instructor at ActionQuest, I was responsible for teaching scuba diving to students aged 12-16. I was responsible for leading dives and ensuring the safety of all students. I will also be responsible for creating a positive and inclusive community within the program and ensuring that all students feel welcome and supported.",
+  },
+  {
+    id: 996,
+    companyLogoUrl: "/images/ud-minimal-logo.jpg",
+    location: "University Courtyard Apartments",
+    companyName: "University of Delaware, Newark, DE",
+    title: "Resident Assistant",
+    duration: "August 2024 - Present",
+    description:
+      "As a Resident Assistant, I have 60 residents who I am responsible for. I am responsible for creating a community within my floor and ensuring that my residents are safe and happy. I am also responsible for creating and implementing programs for my residents to attend. I am also responsible for enforcing the rules of the residence hall and ensuring that my residents are following them.",
+  },
+  {
     id: 997,
     companyLogoUrl: "/images/ud-minimal-logo.jpg",
     location: "South Central Community",
     companyName: "University of Delaware, Newark, DE",
     title: "Resident Assistant",
-    duration: "August 2023 - Present",
+    duration: "August 2023 - May 2024",
     description:
       "As a Resident Assistant, I have 20 residents who I am responsible for. I am responsible for creating a community within my floor and ensuring that my residents are safe and happy. I am also responsible for creating and implementing programs for my residents to attend. I am also responsible for enforcing the rules of the residence hall and ensuring that my residents are following them.",
   },
