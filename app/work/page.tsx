@@ -22,7 +22,7 @@ type Props = {
 
 const jobs: Job[] = [
   {
-    id: 995,
+    id: 992,
     companyLogoUrl: "/images/aq-logo.png",
     location: "Tortola, British Virgin Islands",
     companyName: "ActionQuest",
@@ -32,7 +32,7 @@ const jobs: Job[] = [
       "As a Dive Instructor at ActionQuest, I was responsible for teaching scuba diving to students aged 12-16. I was responsible for leading dives and ensuring the safety of all students. I will also be responsible for creating a positive and inclusive community within the program and ensuring that all students feel welcome and supported.",
   },
   {
-    id: 996,
+    id: 993,
     companyLogoUrl: "/images/ud-minimal-logo.jpg",
     location: "University Courtyard Apartments",
     companyName: "University of Delaware, Newark, DE",
@@ -42,24 +42,54 @@ const jobs: Job[] = [
       "As a Resident Assistant, I have 60 residents who I am responsible for. I am responsible for creating a community within my floor and ensuring that my residents are safe and happy. I am also responsible for creating and implementing programs for my residents to attend. I am also responsible for enforcing the rules of the residence hall and ensuring that my residents are following them.",
   },
   {
-    id: 997,
+    id: 994,
+    companyLogoUrl: "/images/aq-logo.png",
+    location: "Tortola, British Virgin Islands",
+    companyName: "ActionQuest",
+    title: "Dive Instructor",
+    duration: "June 7, 2024 - July 29, 2024",
+    description:
+      "As a Dive Instructor at ActionQuest, I was responsible for teaching scuba diving to students aged 12-16. I was responsible for leading dives and ensuring the safety of all students. I will also be responsible for creating a positive and inclusive community within the program and ensuring that all students feel welcome and supported.",
+  },
+  {
+    id: 995,
     companyLogoUrl: "/images/ud-minimal-logo.jpg",
-    location: "South Central Community",
+    location: "University Courtyard Apartments",
+    companyName: "University of Delaware, Newark, DE",
+    title: "Resident Assistant",
+    duration: "August 2024 - Present",
+    description:
+      "As a Resident Assistant, I have 60 residents who I am responsible for. I am responsible for creating a community within my floor and ensuring that my residents are safe and happy. I am also responsible for creating and implementing programs for my residents to attend. I am also responsible for enforcing the rules of the residence hall and ensuring that my residents are following them.",
+  },
+  {
+    id: 996,
+    companyLogoUrl: "/images/ud-minimal-logo.jpg",
+    location: "Residence Life & Housing",
     companyName: "University of Delaware, Newark, DE",
     title: "Resident Assistant",
     duration: "August 2023 - May 2024",
     description:
-      "As a Resident Assistant, I have 20 residents who I am responsible for. I am responsible for creating a community within my floor and ensuring that my residents are safe and happy. I am also responsible for creating and implementing programs for my residents to attend. I am also responsible for enforcing the rules of the residence hall and ensuring that my residents are following them.",
+      "I'm currently in my second year as a Resident Assistant, overseeing 60 residents in apartment-style housing. In my first year, I managed 20 residents in dorm-style housing, focusing on building community through events, ensuring safety, and enforcing residence hall policies.",
   },
   {
-    id: 998,
+    id: 997,
     companyLogoUrl: "/images/ud-minimal-logo.jpg",
     location: "Pearson Hall Makerspace",
     companyName: "University of Delaware, Newark, DE",
     title: "Lab Assistant",
     duration: "March 2023 - Present",
     description:
-      "As a Lab Assistant, I support the day-to-day operations of the Pearson Hall Makerspace through engagement with users of various experience levels, management of machine queues, administration of tool inventory, stocking of materials and other duties associated with maintaining a fabrication space. I serve in both the Physical and Digital Fabrication areas. I also assist with the development of the space, designing and implementing new processes and procedures to improve the user experience.",
+      "Last year, as a Lab Assistant at the Pearson Hall Makerspace, I supported daily operations by engaging with users, managing machine queues, and maintaining the fabrication space in both Physical and Digital Fabrication areas. In my second year, I am focused on managing a senior design team and overseeing the development of a full-stack application to streamline and consolidate makerspace processes. Once complete, the app will be used daily by makerspace staff, students, and college deans to analyze space usage and financial assets through real-time custom queries that can be saved to personal user dashboards.",
+  },
+  {
+    id: 998,
+    companyLogoUrl: "/images/actionquest-logo.png",
+    location: "British Virgin Islands",
+    companyName: "ActionQuest, West End, Tortola",
+    title: "Dive Instructor",
+    duration: "Summer 2024",
+    description:
+      "As a Dive Instructor at ActionQuest, I was responsible for teaching scuba diving to students ages 12-16. I led dives and ensured the safety of all students both in water and out of water through physics, health, and diving lessons. I was also responsible for creating a positive and inclusive community within the program and ensuring all students feel welcome and supported."
   },
   {
     id: 999,
@@ -67,9 +97,9 @@ const jobs: Job[] = [
     location: "",
     companyName: "Fairfax County Public Schools, McLean, VA",
     title: "Event Service Technician",
-    duration: "August 2022 - Present",
+    duration: "August 2022 - June 2024",
     description:
-      "As an experienced Event Service Technician, I specialize in providing reliable and efficient technological support for schools within the Fairfax County Public School system. I have extensive expertise in live audio, lighting, and streaming services, which enables me to ensure that all technical aspects of events run smoothly. Additionally, I am adept at supporting teacher and faculty trainings by providing seamless laptop and projection support. I am skilled at quickly identifying and resolving technical issues, which allows me to provide the best possible support. With my strong attention to detail and excellent communication skills, I ensure that all stakeholders are kept informed and satisfied with the services I provide. The most common events were superintendent community meetings, school board meetings, and faculty. These events were high stake events that required a high level of professionalism and attention to detail.",
+      "I provided technical support for high-stakes events such as superintendent and school board meetings. I specialize in live audio, lighting, streaming, and laptop support for training. With strong problem-solving skills and attention to detail, I ensure smooth event execution and clear communication with all required internal and external clients.",
   },
   {
     id: 1000,
@@ -79,7 +109,7 @@ const jobs: Job[] = [
     title: "Student Technician",
     duration: "October 2019 - August 2022",
     description:
-      "As a student technician in high school, I was responsible for providing live sound and lighting support for various events held within the school. Additionally, I managed the spaces used for events and acted as the main point of contact between the event coordinators and the school while the event was takign place. With my strong attention to detail and ability to work well under pressure, I ensured that all technical aspects of the events ran smoothly. Through my work as a student technician, I gained valuable experience in event management and technical support, which has prepared me for future opportunities in this field.",
+      "In high school, I was involved with the theater program and was hired by the county to oversee paid events in the auditorium. My responsibilities included managing technical aspects like lighting, sound, and projections, as well as serving as the primary point of contact for clients, ensuring smooth communication and satisfaction during events.",
   },
 ];
 
