@@ -1,3 +1,6 @@
+import { motion } from "framer-motion";
+import Image from "next/image";
+
 export type Project = {
     id: number;
     imageUrl: string;
@@ -6,7 +9,6 @@ export type Project = {
     shownLink: string;
     link: string;
     description: string;
-
 };
 
 type Props = {
@@ -17,37 +19,90 @@ type Props = {
 const Highlighted = ({ projectData, handleClose }: Props) => {
     const { imageUrl, title, summary, shownLink, link, description } = projectData;
 
+    const overlayVariants = {
+        hidden: { opacity: 0 },
+        visible: { opacity: 1, transition: { duration: 0.3 } },
+        exit: { opacity: 0, transition: { duration: 0.3 } }
+    };
+
+    const modalVariants = {
+        hidden: { opacity: 0, scale: 0.8, y: 50 },
+        visible: { 
+            opacity: 1, 
+            scale: 1, 
+            y: 0,
+            transition: { 
+                type: "spring", 
+                damping: 25, 
+                stiffness: 300,
+                duration: 0.5
+            }
+        },
+        exit: { 
+            opacity: 0, 
+            scale: 0.8, 
+            y: 50,
+            transition: { duration: 0.3 }
+        }
+    };
+
     return (
-        <div className="fixed z-50 inset-0 overflow-y-auto flex justify-center items-center">
-            <div
-                className="fixed inset-0 transition-opacity"
-                aria-hidden="true"
+        <motion.div 
+            className="fixed z-50 inset-0 overflow-y-auto flex justify-center items-center p-4"
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+        >
+            <motion.div
+                className="fixed inset-0 bg-black/70 backdrop-blur-sm"
+                variants={overlayVariants}
+                onClick={handleClose}
+            />
+            
+            <motion.div
+                className="relative bg-white rounded-xl overflow-hidden shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto"
+                variants={modalVariants}
             >
-                <div className="absolute inset-0 bg-black opacity-75"></div>
-            </div>
-            <div
-                className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-3xl sm:w-3/4"
-            >
-                <div className="sm:flex sm:items-start">
-                    <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                        <h3 className="text-lg font-medium leading-6 text-gray-900 mb-2">
-                            {title}
-                        </h3>
-                        <a href={link} className="text-sm text-gray-500 hover:text-blue-500">{shownLink}</a>
-                        <div className="mt-4 text-base text-gray-700">{description}</div>
-                        <div className="mt-5 sm:mt-6">
-                            <button
-                                type="button"
-                                className="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-gray-800 text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:text-sm"
-                                onClick={handleClose}
-                            >
-                                Close
-                            </button>
-                        </div>
+                <div className="relative h-64 w-full">
+                    <Image
+                        src={imageUrl}
+                        alt={title}
+                        fill
+                        className="object-cover"
+                        priority
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+                    <div className="absolute bottom-0 left-0 p-6 text-white">
+                        <h3 className="text-2xl font-bold">{title}</h3>
+                        <a 
+                            href={link} 
+                            className="text-sm text-blue-300 hover:text-blue-200 transition-colors"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            {shownLink}
+                        </a>
                     </div>
                 </div>
-            </div>
-        </div>
+                
+                <div className="p-6">
+                    <div className="prose max-w-none">
+                        <p className="text-lg text-gray-700 leading-relaxed">{description}</p>
+                    </div>
+                    
+                    <div className="mt-8 flex justify-end">
+                        <motion.button
+                            className="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-md font-medium shadow-md hover:shadow-lg transition-all"
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            onClick={handleClose}
+                        >
+                            Close
+                        </motion.button>
+                    </div>
+                </div>
+            </motion.div>
+        </motion.div>
     );
 };
 

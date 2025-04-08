@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Navbar from "../navbar";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Highlighted from "./highlighted";
 
 export type Project = {
@@ -67,10 +67,33 @@ const projects: Project[] = [
   },
 ];
 
-const variants = {
-  initial: { opacity: 0 },
-  animate: { opacity: 1, transition: { duration: 0.6 } },
-  exit: { opacity: 0, transition: { duration: 0.6 } },
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5
+    }
+  },
+  hover: {
+    y: -10,
+    boxShadow: "0 10px 25px rgba(0,0,0,0.1)",
+    transition: {
+      duration: 0.3
+    }
+  }
 };
 
 const Page = () => {
@@ -87,55 +110,88 @@ const Page = () => {
   return (
     <>
       <Navbar />
-      <div className="max-w-6xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-        <h1 className="text-xl font-bold mb-8">Projects</h1>
+      <motion.div
+        className="max-w-6xl mx-auto py-12 px-4 sm:px-6 lg:px-8"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        <motion.h1 
+          className="text-3xl font-bold mb-8 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          Projects
+        </motion.h1>
+        
         <motion.div
-          className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-          variants={variants}
-          initial="initial"
-          animate="animate"
-          exit="exit"
+          className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
         >
           {projects.map((project) => (
             <motion.div
               key={project.title}
-              className="block rounded-lg overflow-hidden shadow-md relative"
-              variants={variants}
+              className="bg-white rounded-xl overflow-hidden shadow-lg relative group"
+              variants={itemVariants}
+              whileHover="hover"
             >
-              <a href={project.link}>
+              <div className="relative overflow-hidden">
                 <Image
                   src={project.imageUrl}
                   alt={project.title}
-                  className="w-full h-64"
+                  className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105"
                   width={1624}
                   height={1056}
                   priority
                 />
-              </a>
-              <div className="flex-grow p-6">
-                <h2 className="text-lg font-bold mb-2">{project.title}</h2>
-                <p className="text-base text-gray-600 mb-20">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                  <a 
+                    href={project.link}
+                    className="w-full p-4 text-white text-center font-medium"
+                  >
+                    Visit Project
+                  </a>
+                </div>
+              </div>
+              
+              <div className="p-6">
+                <h2 className="text-xl font-bold mb-3 text-gray-800">{project.title}</h2>
+                <p className="text-base text-gray-600 mb-6">
                   {project.summary}
                 </p>
-                <div className="flex justify-end">
-                  <button
-                    className="w-fit rounded-md border border-transparent shadow-sm px-4 py-2 bg-gray-800 text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:text-sm absolute bottom-0 right-0 mb-6 mr-4"
+                <div className="flex justify-between items-center">
+                  <a 
+                    href={project.link}
+                    className="text-sm text-blue-600 hover:text-blue-800 transition-colors"
+                  >
+                    {project.shownLink}
+                  </a>
+                  <motion.button
+                    className="px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-md font-medium shadow-md hover:shadow-lg transition-all"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                     onClick={() => handleProjectClick(project)}
                   >
                     View Details
-                  </button>
+                  </motion.button>
                 </div>
               </div>
             </motion.div>
           ))}
         </motion.div>
-        {selectedProject && (
-          <Highlighted
-            projectData={selectedProject}
-            handleClose={handleProjectClose}
-          />
-        )}
-      </div>
+        
+        <AnimatePresence>
+          {selectedProject && (
+            <Highlighted
+              projectData={selectedProject}
+              handleClose={handleProjectClose}
+            />
+          )}
+        </AnimatePresence>
+      </motion.div>
     </>
   );
 };

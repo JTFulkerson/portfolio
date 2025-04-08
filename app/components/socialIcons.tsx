@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
+
 const Social = () => {
     const socials = [
         {
@@ -34,33 +35,62 @@ const Social = () => {
         }
     ];
 
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.1
+            }
+        }
+    };
+
+    const itemVariants = {
+        hidden: { opacity: 0, y: 10 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: {
+                duration: 0.4
+            }
+        },
+        hover: {
+            y: -5,
+            scale: 1.1,
+            transition: {
+                duration: 0.2
+            }
+        }
+    };
+
     return (
         <motion.div
-            className="grid grid-flow-col"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 1.0 }}
+            className="flex flex-wrap gap-4"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
         >
             {socials.map((social) => (
-                <a href={social.link} key={social.title}>
-                    <motion.div
-                        className="1vw p-1 hover:pt-0"
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, delay: 1.2 }}
-                        whileHover={{ scale: 1.2, zIndex: 1 }}
-                        whileTap={{ scale: 0.8 }}
-                    >
-                        <Image
-                            className="h-full w-ful"
-                            src={social.imageUrl}
-                            alt=""
-                            width={100}
-                            height={100}
-                            priority
-                        />
-                    </motion.div>
-                </a>
+                <motion.a 
+                    href={social.link} 
+                    key={social.title}
+                    variants={itemVariants}
+                    whileHover="hover"
+                    whileTap={{ scale: 0.95 }}
+                    className="bg-white p-3 rounded-full shadow-md hover:shadow-lg transition-shadow"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={social.title}
+                >
+                    <Image
+                        className="w-6 h-6"
+                        src={social.imageUrl}
+                        alt={social.title}
+                        width={24}
+                        height={24}
+                        priority
+                    />
+                </motion.a>
             ))}
         </motion.div>
     );

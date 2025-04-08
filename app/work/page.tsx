@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Navbar from "../navbar";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Highlighted from "./highlighted";
 
 export type Job = {
@@ -73,10 +73,33 @@ const jobs: Job[] = [
   },
 ];
 
-const variants = {
-  initial: { opacity: 0 },
-  animate: { opacity: 1, transition: { duration: 0.6 } },
-  exit: { opacity: 0, transition: { duration: 0.6 } },
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5
+    }
+  },
+  hover: {
+    y: -10,
+    boxShadow: "0 10px 25px rgba(0,0,0,0.1)",
+    transition: {
+      duration: 0.3
+    }
+  }
 };
 
 const Page = () => {
@@ -93,56 +116,97 @@ const Page = () => {
   return (
     <>
       <Navbar />
-      <div className="max-w-6xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-        <h1 className="text-xl font-bold mb-8">Work Experience</h1>
+      <motion.div
+        className="max-w-6xl mx-auto py-12 px-4 sm:px-6 lg:px-8"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        <motion.h1 
+          className="text-3xl font-bold mb-8 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          Work Experience
+        </motion.h1>
+        
         <motion.div
-          className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-          variants={variants}
-          initial="initial"
-          animate="animate"
-          exit="exit"
+          className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
         >
           {jobs.map((job) => (
             <motion.div
               key={job.title}
-              className="bg-white rounded-lg shadow-md p-8 relative flex flex-col"
-              variants={variants}
+              className="bg-white rounded-xl overflow-hidden shadow-lg relative group"
+              variants={itemVariants}
+              whileHover="hover"
             >
-              <div className="sm:flex-shrink-0 sm:mb-0 mb-4">
-                <Image
-                  src={job.companyLogoUrl}
-                  alt={job.companyName}
-                  className="h-fit object-contain"
-                  width={150}
-                  height={150}
-                  priority
-                />
-              </div>
-              <div className="flex-grow">
-                <h2 className="text-lg font-bold mb-2">{job.title}</h2>
+              <div className="p-6 flex flex-col h-full">
+                <div className="flex items-center mb-4">
+                  <div className="w-16 h-16 relative mr-4 rounded-lg overflow-hidden bg-gray-100 flex items-center justify-center">
+                    <Image
+                      src={job.companyLogoUrl}
+                      alt={job.companyName}
+                      className="object-contain"
+                      width={64}
+                      height={64}
+                      priority
+                    />
+                  </div>
+                  <div>
+                    <h2 className="text-xl font-bold text-gray-800">{job.title}</h2>
+                    <p className="text-base text-gray-600">{job.companyName}</p>
+                  </div>
+                </div>
+                
                 {job.location && (
-                  <p className="text-base text-gray-600 mb-2">{job.location}</p>
+                  <p className="text-sm text-gray-500 mb-2 flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                    {job.location}
+                  </p>
                 )}
-                <p className="text-base text-gray-600 mb-4">
-                  {job.companyName}
+                
+                <p className="text-sm text-gray-500 mb-4 flex items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                  {job.duration}
                 </p>
-                <p className="text-base text-gray-600 mb-14">{job.duration}</p>
-                <div className="flex justify-end">
-                  <button
-                    className="w-fit rounded-md border border-transparent shadow-sm px-4 py-2 bg-gray-800 text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:text-sm absolute bottom-0 right-0 mb-6 mr-4"
+                
+                <p className="text-base text-gray-600 mb-6 line-clamp-3">
+                  {job.description}
+                </p>
+                
+                <div className="mt-auto flex justify-end">
+                  <motion.button
+                    className="px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-md font-medium shadow-md hover:shadow-lg transition-all"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                     onClick={() => handleJobClick(job)}
                   >
                     View Details
-                  </button>
+                  </motion.button>
                 </div>
               </div>
             </motion.div>
           ))}
         </motion.div>
-        {selectedJob && (
-          <Highlighted jobData={selectedJob} handleClose={handleJobClose} />
-        )}
-      </div>
+        
+        <AnimatePresence>
+          {selectedJob && (
+            <Highlighted
+              jobData={selectedJob}
+              handleClose={handleJobClose}
+            />
+          )}
+        </AnimatePresence>
+      </motion.div>
     </>
   );
 };
