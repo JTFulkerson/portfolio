@@ -51,45 +51,47 @@ const Home = () => {
       <Head> </Head>
       <Navbar />
       <motion.div
-        className="h-[calc(100vh-80px)] flex items-center justify-center px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-gray-50 overflow-hidden"
+        className="h-[calc(100vh-80px)] flex items-center justify-center px-2 sm:px-4 lg:px-6 bg-gradient-to-b from-white to-gray-50 overflow-hidden"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
       >
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-7xl mx-auto w-full">
           <motion.div
-            className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center"
+            className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-16 items-center"
             variants={containerVariants}
             initial="hidden"
             animate="visible"
           >
             <motion.div
-              className="relative rounded-2xl overflow-hidden shadow-2xl"
+              className="relative w-[24rem] h-[24rem] sm:w-[30rem] sm:h-[30rem] lg:w-[36rem] lg:h-[36rem] mx-auto"
               variants={imageVariants}
               whileHover="hover"
             >
-              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-10" />
-              <Image
-                src="/images/headshot.png"
-                alt="John Fulkerson"
-                height={1000}
-                width={1000}
-                priority
-                className="w-full h-auto object-cover"
-              />
+              <div className="relative w-full h-full rounded-full overflow-hidden shadow-2xl">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent z-10 rounded-full" />
+                <Image
+                  src="/images/headshot.png"
+                  alt="John Fulkerson"
+                  height={1000}
+                  width={1000}
+                  priority
+                  className="w-full h-full object-cover rounded-full"
+                />
+              </div>
             </motion.div>
             
             <motion.div
-              className="flex flex-col justify-center space-y-6"
+              className="flex flex-col justify-center space-y-8"
               variants={containerVariants}
             >
               <motion.div variants={itemVariants}>
-                <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
+                <h1 className="text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold leading-tight">
                   <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                     John
                   </span>
                 </h1>
-                <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
+                <h1 className="text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold leading-tight">
                   <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
                     Fulkerson
                   </span>
@@ -97,14 +99,14 @@ const Home = () => {
               </motion.div>
               
               <motion.h2
-                className="text-xl md:text-2xl text-gray-700 font-medium"
+                className="text-l md:text-xl lg:text-2xl text-gray-700 font-medium"
                 variants={itemVariants}
               >
                 BS Computer Science | University of Delaware '26
               </motion.h2>
               
               <motion.p
-                className="text-lg text-gray-600 max-w-lg"
+                className="text-xl md:text-2xl text-gray-600 max-w-2xl"
                 variants={itemVariants}
               >
                 Computer Science student with a passion for technology, diving, and sailing. 
@@ -112,7 +114,7 @@ const Home = () => {
               </motion.p>
               
               <motion.div
-                className="pt-4"
+                className=""
                 variants={itemVariants}
               >
                 <Social />

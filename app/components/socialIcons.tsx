@@ -1,7 +1,11 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 
-const Social = () => {
+interface SocialProps {
+    className?: string;
+}
+
+const Social = ({ className = '' }: SocialProps) => {
     const socials = [
         {
             imageUrl: "/icons/email.svg",
@@ -35,6 +39,10 @@ const Social = () => {
         }
     ];
 
+    // Calculate optimal sizing based on container and number of icons
+    const numIcons = socials.length;
+    const gapMultiplier = numIcons - 1; // Number of gaps between icons
+
     const containerVariants = {
         hidden: { opacity: 0 },
         visible: {
@@ -64,35 +72,77 @@ const Social = () => {
     };
 
     return (
-        <motion.div
-            className="flex flex-wrap gap-4"
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
+        <div 
+            className={`${className}`}
+            style={{
+                // Algorithm: Distribute available width among icons and gaps
+                // Total width = (icon + padding*2) * numIcons + gap * (numIcons-1)
+                // Solve for icon size to fill container width
+                '--base-gap': '0.5rem',
+                '--container-padding': '0.25rem',
+                '--available-width': `calc(100% - var(--container-padding) * 2)`,
+                '--gap-total': `calc(var(--base-gap) * ${gapMultiplier})`,
+                '--icon-container-width': `calc((var(--available-width) - var(--gap-total)) / ${numIcons})`,
+                '--icon-padding': 'max(0.15rem, min(0.4rem, calc(var(--icon-container-width) * 0.08)))',
+                '--icon-size': `calc(var(--icon-container-width) - var(--icon-padding) * 2)`,
+                padding: 'var(--container-padding)',
+                height: 'calc(var(--icon-container-width) + var(--container-padding) * 2)'
+            } as React.CSSProperties}
         >
-            {socials.map((social) => (
-                <motion.a 
-                    href={social.link} 
-                    key={social.title}
-                    variants={itemVariants}
-                    whileHover="hover"
-                    whileTap={{ scale: 0.95 }}
-                    className="bg-white p-3 rounded-full shadow-md hover:shadow-lg transition-shadow"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={social.title}
-                >
-                    <Image
-                        className="w-6 h-6"
-                        src={social.imageUrl}
-                        alt={social.title}
-                        width={24}
-                        height={24}
-                        priority
-                    />
-                </motion.a>
-            ))}
-        </motion.div>
+            <motion.div
+                className="flex justify-between items-center w-full h-full"
+                style={{
+                    gap: 'var(--base-gap)'
+                }}
+                variants={containerVariants}
+                initial="hidden"
+                animate="visible"
+            >
+                {socials.map((social) => (
+                    <motion.a 
+                        href={social.link} 
+                        key={social.title}
+                        variants={itemVariants}
+                        whileHover="hover"
+                        whileTap={{ scale: 0.95 }}
+                        className="bg-white rounded-full shadow-md hover:shadow-lg transition-shadow flex-shrink-0"
+                        style={{
+                            padding: 'var(--icon-padding)',
+                            width: 'var(--icon-container-width)',
+                            height: 'var(--icon-container-width)',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            aspectRatio: '1',
+                            minWidth: 'calc(30px + var(--icon-padding) * 2)',
+                            minHeight: 'calc(30px + var(--icon-padding) * 2)',
+                            maxWidth: 'calc(72px + var(--icon-padding) * 2)',
+                            maxHeight: 'calc(72px + var(--icon-padding) * 2)'
+                        }}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={social.title}
+                    >
+                        <Image
+                            className="block"
+                            style={{
+                                width: 'var(--icon-size)',
+                                height: 'var(--icon-size)',
+                                maxWidth: '72px',
+                                maxHeight: '72px',
+                                minWidth: '50px',
+                                minHeight: '50px'
+                            }}
+                            src={social.imageUrl}
+                            alt={social.title}
+                            width={50}
+                            height={50}
+                            priority
+                        />
+                    </motion.a>
+                ))}
+            </motion.div>
+        </div>
     );
 }
 
