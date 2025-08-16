@@ -72,28 +72,9 @@ const Social = ({ className = '' }: SocialProps) => {
     };
 
     return (
-        <div 
-            className={`${className}`}
-            style={{
-                // Algorithm: Distribute available width among icons and gaps
-                // Total width = (icon + padding*2) * numIcons + gap * (numIcons-1)
-                // Solve for icon size to fill container width
-                '--base-gap': '0.5rem',
-                '--container-padding': '0.25rem',
-                '--available-width': `calc(100% - var(--container-padding) * 2)`,
-                '--gap-total': `calc(var(--base-gap) * ${gapMultiplier})`,
-                '--icon-container-width': `calc((var(--available-width) - var(--gap-total)) / ${numIcons})`,
-                '--icon-padding': 'max(0.15rem, min(0.4rem, calc(var(--icon-container-width) * 0.08)))',
-                '--icon-size': `calc(var(--icon-container-width) - var(--icon-padding) * 2)`,
-                padding: 'var(--container-padding)',
-                height: 'calc(var(--icon-container-width) + var(--container-padding) * 2)'
-            } as React.CSSProperties}
-        >
+        <div className={`flex justify-center lg:justify-start items-center w-full ${className}`}>
             <motion.div
-                className="flex justify-between items-center w-full h-full"
-                style={{
-                    gap: 'var(--base-gap)'
-                }}
+                className="flex items-center justify-between w-full max-w-sm sm:max-w-md lg:max-w-lg gap-4 sm:gap-6"
                 variants={containerVariants}
                 initial="hidden"
                 animate="visible"
@@ -105,38 +86,17 @@ const Social = ({ className = '' }: SocialProps) => {
                         variants={itemVariants}
                         whileHover="hover"
                         whileTap={{ scale: 0.95 }}
-                        className="bg-white rounded-full shadow-md hover:shadow-lg transition-shadow flex-shrink-0"
-                        style={{
-                            padding: 'var(--icon-padding)',
-                            width: 'var(--icon-container-width)',
-                            height: 'var(--icon-container-width)',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            aspectRatio: '1',
-                            minWidth: 'calc(30px + var(--icon-padding) * 2)',
-                            minHeight: 'calc(30px + var(--icon-padding) * 2)',
-                            maxWidth: 'calc(72px + var(--icon-padding) * 2)',
-                            maxHeight: 'calc(72px + var(--icon-padding) * 2)'
-                        }}
+                        className="bg-white rounded-full shadow-md hover:shadow-lg transition-shadow flex-shrink-0 p-3 sm:p-4 md:p-4 lg:p-5"
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label={social.title}
                     >
                         <Image
-                            className="block"
-                            style={{
-                                width: 'var(--icon-size)',
-                                height: 'var(--icon-size)',
-                                maxWidth: '72px',
-                                maxHeight: '72px',
-                                minWidth: '50px',
-                                minHeight: '50px'
-                            }}
+                            className="block w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 lg:w-9 lg:h-9"
                             src={social.imageUrl}
                             alt={social.title}
-                            width={50}
-                            height={50}
+                            width={36}
+                            height={36}
                             priority
                         />
                     </motion.a>
