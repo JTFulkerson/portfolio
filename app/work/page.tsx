@@ -22,14 +22,24 @@ type Props = {
 
 const jobs: Job[] = [
   {
+    id: 995,
+    companyLogoUrl: "/images/costar-logo.png",
+    location: "Shared Services Team",
+    companyName: "CoStar Group, Arlington, VA",
+    title: "Technology Intern",
+    duration: "June 2025 - August 2025",
+    description:
+      "Collaborated on CoStar’s first infrastructure-based generative AI framework to scale AI-powered content creation across all products. Built with TypeScript and AWS services, the system improved workflow speed, accuracy, and cost efficiency.",
+  },
+  {
     id: 996,
     companyLogoUrl: "/images/ud-minimal-logo.jpg",
     location: "Residence Life & Housing",
     companyName: "University of Delaware, Newark, DE",
     title: "Resident Assistant",
-    duration: "August 2023 - Present",
+    duration: "August 2023 - May 2025",
     description:
-      "I'm currently in my second year as a Resident Assistant, overseeing 60 residents in apartment-style housing. In my first year, I managed 20 residents in dorm-style housing, focusing on building community through events, ensuring safety, and enforcing residence hall policies.",
+      "Served two years as a Resident Assistant, overseeing 60 residents in apartment-style housing during my second year and 20 residents in dorm-style housing during my first year. Focused on building community through events, ensuring safety, and enforcing residence hall policies.",
   },
   {
     id: 997,
@@ -57,7 +67,7 @@ const jobs: Job[] = [
     location: "",
     companyName: "Fairfax County Public Schools, McLean, VA",
     title: "Event Service Technician",
-    duration: "August 2022 - June 2024",
+    duration: "August 2022 - August 2025",
     description:
       "I provided technical support for high-stakes events such as superintendent and school board meetings. I specialize in live audio, lighting, streaming, and laptop support for training. With strong problem-solving skills and attention to detail, I ensure smooth event execution and clear communication with all required internal and external clients.",
   },
@@ -122,7 +132,7 @@ const Page = () => {
         initial="hidden"
         animate="visible"
       >
-        <motion.h1 
+        <motion.h1
           className="text-3xl font-bold mb-8 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -130,7 +140,7 @@ const Page = () => {
         >
           Work Experience
         </motion.h1>
-        
+
         <motion.div
           className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8"
           variants={containerVariants}
@@ -161,7 +171,7 @@ const Page = () => {
                     <p className="text-base text-gray-600">{job.companyName}</p>
                   </div>
                 </div>
-                
+
                 {job.location && (
                   <p className="text-sm text-gray-500 mb-2 flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -171,18 +181,18 @@ const Page = () => {
                     {job.location}
                   </p>
                 )}
-                
+
                 <p className="text-sm text-gray-500 mb-4 flex items-center">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
                   {job.duration}
                 </p>
-                
+
                 <p className="text-base text-gray-600 mb-6 line-clamp-3">
                   {job.description}
                 </p>
-                
+
                 <div className="mt-auto flex justify-end">
                   <motion.button
                     className="px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-md font-medium shadow-md hover:shadow-lg transition-all"
@@ -197,7 +207,7 @@ const Page = () => {
             </motion.div>
           ))}
         </motion.div>
-        
+
         <AnimatePresence>
           {selectedJob && (
             <Highlighted
