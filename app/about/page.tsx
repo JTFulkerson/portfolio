@@ -4,20 +4,30 @@ import { motion } from "framer-motion";
 
 const About = () => {
     const hobbies = [
-        { name: "Mountain Biking", icon: "🚵" },
         { name: "Sailing", icon: "⛵️" },
         { name: "Scuba Diving", icon: "🤿" },
-        { name: "Music", icon: "🎶" },
+        { name: "Theater & Performing Arts", icon: "🎭" },
+        { name: "Technical Production", icon: "🎬" },
+        { name: "Coffee", icon: "☕" },
+        { name: "Outdoors", icon: "🏕️" },
+        { name: "Woodworking", icon: "🪵" },
+        { name: "Making", icon: "🖨️" },
+        { name: "Cooking", icon: "👨‍🍳" },
     ];
 
     const skills = [
-        { name: "Java", icon: "☕️", proficiency: "Intermediate" },
-        { name: "Python", icon: "🐍", proficiency: "Intermediate" },
-        { name: "C", icon: "🅒", proficiency: "Intermediate" },
-        { name: "HTML", icon: "🌐", proficiency: "Intermediate" },
-        { name: "CSS", icon: "💅", proficiency: "Intermediate" },
-        { name: "Node.js", icon: "🟢", proficiency: "Intermediate" },
-        { name: "React", icon: "⚛️", proficiency: "Intermediate" },
+        { name: "TypeScript", icon: "🔷" },
+        { name: "JavaScript", icon: "🟨" },
+        { name: "Python", icon: "🐍" },
+        { name: "Java", icon: "☕️" },
+        { name: "C", icon: "🅒" },
+        { name: "React", icon: "⚛️" },
+        { name: "Node.js", icon: "🟢" },
+        { name: "HTML/CSS", icon: "🌐" },
+        { name: "AWS", icon: "☁️" },
+        { name: "Docker", icon: "🐳" },
+        { name: "Git", icon: "📝" },
+        { name: "VS Code", icon: "💻" },
     ];
 
     const certifications = [
@@ -97,7 +107,7 @@ const About = () => {
                         >
                             <h1 className="text-3xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Introduction</h1>
                             <p className="text-lg text-gray-700 leading-relaxed">
-                                I&apos;m a Computer Science student at the University of Delaware, concentrating in Systems and Networks with a cumulative GPA of 3.83. I have experience as a Resident Assistant, Lab Assistant, and Scuba Diving Instructor, and I&apos;ve taken on leadership roles for the University&apos;s Sailing Team.
+                                I&apos;m a Computer Science student at the University of Delaware, concentrating in Systems and Networks with a cumulative GPA of 3.85 (Computer Science courses: 3.96). I&apos;ve been on the Dean&apos;s List for six consecutive semesters and have experience as a Technology Intern at CoStar Group, Resident Assistant, Lab Assistant, and Scuba Diving Instructor. I&apos;ve also served in leadership roles for the University&apos;s Sailing Team, including Commodore and Boatswain positions.
                             </p>
                         </motion.div>
 
@@ -143,10 +153,7 @@ const About = () => {
                                         whileHover={{ scale: 1.05 }}
                                     >
                                         <span className="text-3xl mr-4">{skill.icon}</span>
-                                        <div className="flex flex-col">
-                                            <span className="text-lg font-medium text-gray-800">{skill.name}</span>
-                                            <span className="text-sm text-gray-600">{skill.proficiency}</span>
-                                        </div>
+                                        <span className="text-lg font-medium text-gray-800">{skill.name}</span>
                                     </motion.div>
                                 ))}
                             </motion.div>
@@ -158,7 +165,7 @@ const About = () => {
                         variants={cardVariants}
                         whileHover="hover"
                     >
-                        <h1 className="text-3xl font-bold mb-6 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">Certifications</h1>
+                        <h1 className="text-3xl font-bold mb-6 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">PADI Certifications</h1>
                         <motion.div 
                             className="grid grid-cols-1 gap-4"
                             variants={containerVariants}
