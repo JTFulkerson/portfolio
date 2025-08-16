@@ -12,7 +12,7 @@ const Navbar = () => {
     { name: "About", path: "/about" },
     { name: "Projects", path: "/projects" },
     { name: "Work Experience", path: "/work" },
-    { name: "Resume", path: "/documents/Fulkerson_John_Resume.pdf" },
+    { name: "Resume", path: "/documents/Fulkerson_John_Resume.pdf" }
   ];
 
   const containerVariants = {
@@ -83,7 +83,12 @@ const Navbar = () => {
         >
           <div className="flex flex-col md:flex-row md:items-center">
             {navItems.map((item) => (
-              <motion.div key={item.name} variants={itemVariants} whileHover="hover">
+              <motion.div 
+                key={item.name} 
+                variants={itemVariants} 
+                whileHover={{ y: -5 }}
+                transition={{ duration: 0.2 }}
+              >
                 <Link href={item.path} passHref>
                   <span 
                     className={`inline-block px-4 py-2 font-medium text-lg ${
@@ -141,6 +146,7 @@ const Navbar = () => {
                 key={item.name}
                 variants={itemVariants}
                 whileHover={{ x: 5 }}
+                transition={{ duration: 0.2 }}
               >
                 <Link href={item.path} passHref onClick={() => setShowMenu(false)}>
                   <span 

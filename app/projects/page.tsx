@@ -38,8 +38,8 @@ const projects: Project[] = [
     title: "Timer",
     summary:
       "This is an interactive timer, originally created for the Fairfax County Public Schools School Board. It is a simple, easy to use timer that has shortcut buttons that allow the user to quickly set the timer. It is also possible to click on the timer to set the time manually.",
-    shownLink: "Johntfulkerson.com/timer",
-    link: "./timer",
+    shownLink: "https://timer.johnfulkerson.com",
+    link: "https://timer.johnfulkerson.com",
     description:
       "This is an interactive timer, originally created for the Fairfax County Public Schools School Board. It is a simple, easy to use timer that has shortcut buttons that allow the user to quickly set the timer. It is also possible to click on the timer to set the time manually.",
   },
