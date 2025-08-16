@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 
 export type Job = {
-    id: number;
     companyLogoUrl: string;
     companyName: string;
     title: string;
