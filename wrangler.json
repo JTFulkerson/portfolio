@@ -12,5 +12,11 @@
   },
   "vars": {
     "NODE_ENV": "production"
-  }
+  },
+  "routes": [
+    {
+      "pattern": "johnfulkerson.com",
+      "custom_domain": true
+    }
+  ]
 }
