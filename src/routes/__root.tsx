@@ -32,7 +32,7 @@ export const Route = createRootRoute({
 })
 
 function RootDocument({ children }: { children: React.ReactNode }) {
-  const isDev = process.env.NODE_ENV === 'development';
+  const isDev = import.meta.env.DEV
   return (
     <html lang="en">
       <head>
