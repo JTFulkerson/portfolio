@@ -1,20 +1,17 @@
-import { act, render, screen } from '@testing-library/react'
-import { describe, expect, it, vi } from 'vitest'
+import { render, screen, waitFor } from '@testing-library/react'
+import { describe, expect, it } from 'vitest'
 import { MotionProvider, Reveal, SectionHeading, Typed } from './motion'
 
 describe('Typed', () => {
   it('types out the full text over time', async () => {
-    vi.useFakeTimers()
     render(
       <MotionProvider>
-        <Typed text="whoami" speed={10} />
+        <Typed text="whoami" speed={5} />
       </MotionProvider>,
     )
-    await act(async () => {
-      vi.advanceTimersByTime(200)
-    })
-    expect(screen.getByLabelText('whoami').textContent).toBe('whoami')
-    vi.useRealTimers()
+    await waitFor(() =>
+      expect(screen.getByLabelText('whoami').textContent).toBe('whoami'),
+    )
   })
 })
 
