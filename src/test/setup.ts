@@ -31,3 +31,8 @@ window.matchMedia ??= ((query: string) =>
 
 // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
 Element.prototype.scrollIntoView ??= () => {}
+
+// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+if (!window.HTMLElement.prototype.scrollTo) {
+  window.HTMLElement.prototype.scrollTo = function () {}
+}
