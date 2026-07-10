@@ -27,6 +27,7 @@
 ### Task 1: Test tooling, fonts, and design tokens
 
 **Files:**
+
 - Create: `vitest.config.ts`
 - Create: `src/test/setup.ts`
 - Create: `src/test/smoke.test.ts`
@@ -34,6 +35,7 @@
 - Modify: `package.json` (deps only, via pnpm add)
 
 **Interfaces:**
+
 - Consumes: nothing (first task).
 - Produces: Tailwind utility classes used by ALL later tasks: `bg-bg`, `bg-panel`, `text-fg`, `text-muted`, `text-faint`, `border-line`, `text-accent`, `bg-accent`, `text-prompt`, `bg-prompt`, `text-keyword`, `text-string`, `font-sans`, `font-mono`, plus the `.animate-cursor` class. Test env: jsdom with `IntersectionObserver`/`matchMedia`/`scrollIntoView` shims and RTL auto-cleanup.
 
@@ -166,7 +168,8 @@ This deletes the unused shadcn boilerplate (`.dark` class variant, sidebar/chart
   --color-keyword: var(--syn-keyword);
   --color-string: var(--syn-string);
   --font-sans: 'Inter Variable', system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono Variable', ui-monospace, 'SF Mono', Menlo, monospace;
+  --font-mono:
+    'JetBrains Mono Variable', ui-monospace, 'SF Mono', Menlo, monospace;
 }
 
 html {
@@ -221,6 +224,7 @@ git commit -m "feat: add vitest setup, self-hosted fonts, and design token syste
 ### Task 2: Typed content data files
 
 **Files:**
+
 - Create: `src/data/jobs.ts`
 - Create: `src/data/projects.ts`
 - Create: `src/data/about.ts`
@@ -229,6 +233,7 @@ git commit -m "feat: add vitest setup, self-hosted fonts, and design token syste
 - Test: `src/data/data.test.ts`
 
 **Interfaces:**
+
 - Consumes: nothing.
 - Produces (exact exports later tasks import):
   - `jobs: Array<Job>` where `Job = { title: string; company: string; period: string; status?: 'incoming'; description?: string; featured: boolean }`
@@ -256,7 +261,11 @@ describe('content data', () => {
   })
 
   it('has the three approved projects in order', () => {
-    expect(projects.map((p) => p.name)).toEqual(['Aroma', 'Makerspace Platform', 'Timer'])
+    expect(projects.map((p) => p.name)).toEqual([
+      'Aroma',
+      'Makerspace Platform',
+      'Timer',
+    ])
   })
 
   it('has exactly three primary socials', () => {
@@ -413,10 +422,26 @@ export type Social = {
 export const socials: Array<Social> = [
   { label: 'Email', href: 'mailto:johnfulky@mac.com', primary: true },
   { label: 'GitHub', href: 'https://github.com/JTFulkerson', primary: true },
-  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/jtfulkerson/', primary: true },
-  { label: 'Instagram', href: 'https://www.instagram.com/jt_fulkerson/', primary: false },
-  { label: 'Twitter', href: 'https://twitter.com/JT_Fulkerson', primary: false },
-  { label: 'Facebook', href: 'https://www.facebook.com/john.fulkerson.98837/', primary: false },
+  {
+    label: 'LinkedIn',
+    href: 'https://www.linkedin.com/in/jtfulkerson/',
+    primary: true,
+  },
+  {
+    label: 'Instagram',
+    href: 'https://www.instagram.com/jt_fulkerson/',
+    primary: false,
+  },
+  {
+    label: 'Twitter',
+    href: 'https://twitter.com/JT_Fulkerson',
+    primary: false,
+  },
+  {
+    label: 'Facebook',
+    href: 'https://www.facebook.com/john.fulkerson.98837/',
+    primary: false,
+  },
 ]
 ```
 
@@ -447,12 +472,14 @@ git commit -m "feat: add typed content data files"
 ### Task 3: Palette logic — fuzzy filter, execution, command registry
 
 **Files:**
+
 - Create: `src/lib/fuzzy.ts`
 - Create: `src/lib/palette.ts`
 - Create: `src/data/commands.ts`
 - Test: `src/lib/fuzzy.test.ts`, `src/lib/palette.test.ts`, `src/data/commands.test.ts`
 
 **Interfaces:**
+
 - Consumes: `projects` from `src/data/projects.ts`.
 - Produces:
   - `fuzzyMatch(query: string, target: string): boolean`
@@ -516,7 +543,9 @@ describe('filterCommands', () => {
     expect(filterCommands(testCommands, '')).toHaveLength(2)
   })
   it('filters by name and keywords', () => {
-    expect(filterCommands(testCommands, 'work').map((c) => c.name)).toEqual(['cd #work'])
+    expect(filterCommands(testCommands, 'work').map((c) => c.name)).toEqual([
+      'cd #work',
+    ])
   })
 })
 
@@ -815,11 +844,13 @@ git commit -m "feat: add palette command registry, fuzzy filter, and execution l
 ### Task 4: Command palette UI + provider + ⌘K hotkey
 
 **Files:**
+
 - Create: `src/components/palette/CommandPalette.tsx`
 - Create: `src/components/palette/PaletteProvider.tsx`
 - Test: `src/components/palette/CommandPalette.test.tsx`
 
 **Interfaces:**
+
 - Consumes: `commands`, `CommandContext` from `@/data/commands`; `executeInput`, `filterCommands` from `@/lib/palette`.
 - Produces:
   - `CommandPalette({ open, onClose }: { open: boolean; onClose: () => void })` — the dialog.
@@ -864,7 +895,9 @@ describe('CommandPalette', () => {
     const input = screen.getByLabelText('Command input')
     fireEvent.change(input, { target: { value: 'zzzzzz' } })
     fireEvent.keyDown(input, { key: 'Enter' })
-    expect(screen.getByTestId('scrollback').textContent).toContain('command not found')
+    expect(screen.getByTestId('scrollback').textContent).toContain(
+      'command not found',
+    )
   })
 
   it('closes on Escape', () => {
@@ -1032,7 +1065,11 @@ export function CommandPalette({
             aria-label="Command input"
           />
         </div>
-        <ul className="max-h-64 overflow-y-auto p-2" role="listbox" aria-label="Commands">
+        <ul
+          className="max-h-64 overflow-y-auto p-2"
+          role="listbox"
+          aria-label="Commands"
+        >
           {filtered.map((c, i) => (
             <li key={c.name} role="option" aria-selected={i === selected}>
               <button
@@ -1116,10 +1153,12 @@ git commit -m "feat: add command palette dialog, provider, and cmd-k hotkey"
 ### Task 5: Motion primitives
 
 **Files:**
+
 - Create: `src/components/motion.tsx`
 - Test: `src/components/motion.test.tsx`
 
 **Interfaces:**
+
 - Consumes: design tokens from Task 1 (`text-faint`, `text-fg`, `font-mono`).
 - Produces:
   - `MotionProvider({ children }: { children: ReactNode })` — `LazyMotion` wrapper (bundle-slim animations).
@@ -1262,7 +1301,8 @@ export function SectionHeading({
 
   return (
     <div ref={ref} className="mb-8 font-mono text-xs text-faint">
-      {String(n).padStart(2, '0')} · <span className="font-semibold text-fg">{title}</span>
+      {String(n).padStart(2, '0')} ·{' '}
+      <span className="font-semibold text-fg">{title}</span>
     </div>
   )
 }
@@ -1285,12 +1325,14 @@ git commit -m "feat: add LazyMotion provider, Reveal, Typed, and SectionHeading 
 ### Task 6: Live-data core — TTL cache, GitHub, Spotify (pure, injected fetch)
 
 **Files:**
+
 - Create: `src/lib/edge-cache.ts`
 - Create: `src/lib/github.ts`
 - Create: `src/lib/spotify.ts`
 - Test: `src/lib/edge-cache.test.ts`, `src/lib/github.test.ts`, `src/lib/spotify.test.ts`
 
 **Interfaces:**
+
 - Consumes: nothing internal.
 - Produces:
   - `cached<T extends { ok: boolean }>(key: string, ttlSeconds: number, fetcher: () => Promise<T>): Promise<T>` and `_clearCache(): void` (tests only). Only `ok: true` results are cached; failures are retried on next request.
@@ -1383,17 +1425,23 @@ describe('fetchGithubActivity', () => {
   })
 
   it('returns ok:false on non-200', async () => {
-    const fetchImpl = vi.fn().mockResolvedValue(new Response('nope', { status: 401 }))
-    expect(await fetchGithubActivity('tok', fetchImpl as typeof fetch)).toEqual({
-      ok: false,
-    })
+    const fetchImpl = vi
+      .fn()
+      .mockResolvedValue(new Response('nope', { status: 401 }))
+    expect(await fetchGithubActivity('tok', fetchImpl as typeof fetch)).toEqual(
+      {
+        ok: false,
+      },
+    )
   })
 
   it('returns ok:false when fetch throws', async () => {
     const fetchImpl = vi.fn().mockRejectedValue(new Error('network'))
-    expect(await fetchGithubActivity('tok', fetchImpl as typeof fetch)).toEqual({
-      ok: false,
-    })
+    expect(await fetchGithubActivity('tok', fetchImpl as typeof fetch)).toEqual(
+      {
+        ok: false,
+      },
+    )
   })
 })
 ```
@@ -1404,7 +1452,11 @@ describe('fetchGithubActivity', () => {
 import { describe, expect, it, vi } from 'vitest'
 import { fetchNowPlaying } from './spotify'
 
-const creds = { clientId: 'id', clientSecret: 'secret', refreshToken: 'refresh' }
+const creds = {
+  clientId: 'id',
+  clientSecret: 'secret',
+  refreshToken: 'refresh',
+}
 const tokenResponse = () =>
   new Response(JSON.stringify({ access_token: 'tok' }), { status: 200 })
 
@@ -1549,7 +1601,10 @@ export async function fetchGithubActivity(
         'content-type': 'application/json',
         'user-agent': 'johnfulkerson.com',
       },
-      body: JSON.stringify({ query: QUERY, variables: { login: 'JTFulkerson' } }),
+      body: JSON.stringify({
+        query: QUERY,
+        variables: { login: 'JTFulkerson' },
+      }),
       signal: AbortSignal.timeout(3000),
     })
     if (!res.ok) return { ok: false }
@@ -1565,7 +1620,8 @@ export async function fetchGithubActivity(
         }
       }
     }
-    const calendar = json.data?.user?.contributionsCollection?.contributionCalendar
+    const calendar =
+      json.data?.user?.contributionsCollection?.contributionCalendar
     if (!calendar) return { ok: false }
     return {
       ok: true,
@@ -1676,12 +1732,14 @@ git commit -m "feat: add cached GitHub and Spotify fetchers with graceful failur
 ### Task 7: Server functions + live panels
 
 **Files:**
+
 - Create: `src/server/live.ts`
 - Create: `src/components/live/GithubPanel.tsx`
 - Create: `src/components/live/SpotifyPanel.tsx`
 - Test: `src/components/live/panels.test.tsx`
 
 **Interfaces:**
+
 - Consumes: `cached` from `@/lib/edge-cache`; `fetchGithubActivity`/`GithubActivity` from `@/lib/github`; `fetchNowPlaying`/`NowPlaying` from `@/lib/spotify`.
 - Produces:
   - `getGithubActivity(): Promise<GithubActivity>` and `getNowPlaying(): Promise<NowPlaying>` — TanStack server functions (callable from the client as async functions).
@@ -1948,6 +2006,7 @@ git commit -m "feat: add live-data server functions and GitHub/Spotify panels"
 ### Task 8: Section components
 
 **Files:**
+
 - Create: `src/components/SocialLinks.tsx`
 - Create: `src/lib/use-active-section.ts`
 - Create: `src/components/sections/Nav.tsx`
@@ -1959,6 +2018,7 @@ git commit -m "feat: add live-data server functions and GitHub/Spotify panels"
 - Test: `src/components/sections/sections.test.tsx`
 
 **Interfaces:**
+
 - Consumes: everything produced by Tasks 2, 4 (`usePalette`), 5 (`MotionProvider`, `Reveal`, `Typed`, `SectionHeading`), 7 (`GithubPanel`, `SpotifyPanel`).
 - Produces: `Nav()`, `Hero()`, `WorkTimeline()`, `Projects()`, `About()`, `Footer()` — assembled by Task 9. Also `SocialLinks({ primaryOnly?, className? })` and `useActiveSection(ids: Array<string>): string | null`.
 
@@ -1998,10 +2058,12 @@ describe('sections render', () => {
   it('Hero shows name, CoStar badge, and resume link', () => {
     render(wrap(<Hero />))
     expect(screen.getByText(/John Fulkerson/)).toBeTruthy()
-    expect(screen.getByText('Incoming Software Engineer @ CoStar Group')).toBeTruthy()
-    expect(screen.getByText('resume.pdf').closest('a')?.getAttribute('href')).toBe(
-      '/documents/Fulkerson_John_Resume.pdf',
-    )
+    expect(
+      screen.getByText('Incoming Software Engineer @ CoStar Group'),
+    ).toBeTruthy()
+    expect(
+      screen.getByText('resume.pdf').closest('a')?.getAttribute('href'),
+    ).toBe('/documents/Fulkerson_John_Resume.pdf')
   })
 
   it('WorkTimeline shows featured jobs and an expander', () => {
@@ -2022,13 +2084,17 @@ describe('sections render', () => {
 
   it('About renders story and chips', () => {
     render(wrap(<About />))
-    expect(screen.getByText(/PADI Open Water Scuba Instructor \(taught/)).toBeTruthy()
+    expect(
+      screen.getByText(/PADI Open Water Scuba Instructor \(taught/),
+    ).toBeTruthy()
     expect(screen.getByText('⛵ UD Sailing Commodore')).toBeTruthy()
   })
 
   it('Footer renders the stack credit', () => {
     render(wrap(<Footer />))
-    expect(screen.getByText(/tanstack start on cloudflare workers/)).toBeTruthy()
+    expect(
+      screen.getByText(/tanstack start on cloudflare workers/),
+    ).toBeTruthy()
   })
 })
 ```
@@ -2043,7 +2109,14 @@ Expected: FAIL — modules not found.
 `src/components/SocialLinks.tsx` (lucide icons replace the old `/public/icons/*.svg` files):
 
 ```tsx
-import { Facebook, Github, Instagram, Linkedin, Mail, Twitter } from 'lucide-react'
+import {
+  Facebook,
+  Github,
+  Instagram,
+  Linkedin,
+  Mail,
+  Twitter,
+} from 'lucide-react'
 import { socials } from '@/data/socials'
 
 const ICONS = {
@@ -2139,7 +2212,9 @@ export function Nav() {
               key={s.id}
               href={`#${s.id}`}
               className={
-                active === s.id ? 'font-medium text-fg' : 'text-muted hover:text-fg'
+                active === s.id
+                  ? 'font-medium text-fg'
+                  : 'text-muted hover:text-fg'
               }
             >
               {s.label}
@@ -2186,7 +2261,9 @@ export function Hero() {
           <span className="text-string">{'"full-stack"'}</span>];
         </p>
         <p className="mt-5 max-w-xl text-sm leading-relaxed text-muted">
-          {"CS @ University of Delaware '26. I build software people actually use — from generative-AI infrastructure at CoStar to the app running UD's makerspace."}
+          {
+            "CS @ University of Delaware '26. I build software people actually use — from generative-AI infrastructure at CoStar to the app running UD's makerspace."
+          }
         </p>
         <div className="mt-7 flex flex-wrap items-center gap-3">
           <a
@@ -2223,7 +2300,8 @@ function JobEntry({ job }: { job: Job }) {
   return (
     <Reveal>
       <div className="text-sm font-semibold">
-        {job.title} <span className="font-normal text-muted">· {job.company}</span>
+        {job.title}{' '}
+        <span className="font-normal text-muted">· {job.company}</span>
       </div>
       <div className="mt-0.5 font-mono text-[10px] text-faint">
         {job.period}
@@ -2252,14 +2330,16 @@ export function WorkTimeline() {
             <JobEntry key={`${job.title}-${job.company}`} job={job} />
           ))}
           {expanded ? (
-            rest.map((job) => <JobEntry key={`${job.title}-${job.company}`} job={job} />)
+            rest.map((job) => (
+              <JobEntry key={`${job.title}-${job.company}`} job={job} />
+            ))
           ) : (
             <button
               onClick={() => setExpanded(true)}
               className="text-left font-mono text-[11px] text-faint hover:text-fg"
             >
-              + {rest.length} earlier roles — resident assistant · dive instructor ·
-              event tech
+              + {rest.length} earlier roles — resident assistant · dive
+              instructor · event tech
             </button>
           )}
         </div>
@@ -2287,7 +2367,9 @@ function ProjectRow({ project }: { project: Project }) {
           {project.status}
         </span>
       </div>
-      <p className="mt-2 text-xs leading-relaxed text-muted">{project.description}</p>
+      <p className="mt-2 text-xs leading-relaxed text-muted">
+        {project.description}
+      </p>
       <div className="mt-3 flex flex-wrap gap-1.5">
         {project.tags.map((tag) => (
           <span
@@ -2312,7 +2394,12 @@ function ProjectRow({ project }: { project: Project }) {
   )
 
   return project.link ? (
-    <a href={project.link} target="_blank" rel="noopener noreferrer" className="block">
+    <a
+      href={project.link}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="block"
+    >
       {card}
     </a>
   ) : (
@@ -2388,8 +2475,8 @@ export function Footer() {
     <footer className="border-t border-line px-5 py-8">
       <div className="mx-auto flex max-w-3xl flex-col items-center justify-between gap-3 sm:flex-row">
         <span className="font-mono text-[10px] text-faint">
-          © {new Date().getFullYear()} · built with tanstack start on cloudflare
-          workers
+          © {new Date().getFullYear()} · built with tanstack start on
+          cloudflare workers
         </span>
         <SocialLinks />
       </div>
@@ -2415,6 +2502,7 @@ git commit -m "feat: add nav, hero, work timeline, projects, about, and footer s
 ### Task 9: Assemble the page, update the shell, delete the old site
 
 **Files:**
+
 - Modify: `src/routes/index.tsx` (full replacement)
 - Modify: `src/routes/__root.tsx` (full replacement)
 - Delete: `src/routes/about.tsx`, `src/routes/projects.tsx`, `src/routes/work.tsx`
@@ -2423,6 +2511,7 @@ git commit -m "feat: add nav, hero, work timeline, projects, about, and footer s
 - Keep untouched: `src/routes/resume.tsx`, `src/routes/timer.tsx`, `public/documents/`, `public/favicon.ico`, `public/images/timer-visual.png`, `public/icons/timer-favicon.png`, `public/sounds/`
 
 **Interfaces:**
+
 - Consumes: all section components (Task 8), `PaletteProvider` (Task 4), `MotionProvider` (Task 5).
 - Produces: the finished site.
 
@@ -2551,6 +2640,7 @@ Expected: exits clean (it may rewrite formatting; re-run until clean).
 - [ ] **Step 5: Manual smoke test in the dev server**
 
 Run: `pnpm dev` and verify in a browser:
+
 1. `/` renders the full page: nav, typed `$ whoami`, CoStar badge, timeline, three projects, about, footer.
 2. `⌘K` opens the palette; `whoami` prints output; `cd #projects` scrolls; Esc closes.
 3. `/resume` opens the PDF. `/timer` redirects to timer.johnfulkerson.com.
@@ -2570,12 +2660,14 @@ git commit -m "feat: assemble single-page portfolio, remove old multi-page site"
 ### Task 10: Secrets, live verification, and polish
 
 **Files:**
+
 - Create: `.dev.vars.example`
 - Create: `scripts/spotify-refresh-token.mjs`
 - Modify: `.gitignore` (add `.dev.vars`)
 - Possibly modify: `src/data/projects.ts` (Aroma image, if John provides a screenshot)
 
 **Interfaces:**
+
 - Consumes: server functions from Task 7 read `GITHUB_TOKEN`, `SPOTIFY_CLIENT_ID`, `SPOTIFY_CLIENT_SECRET`, `SPOTIFY_REFRESH_TOKEN` from the Worker env.
 - Produces: a fully live production deployment.
 

@@ -1,6 +1,6 @@
-import Social from '@/components/SocialIcons';
 import { createFileRoute } from '@tanstack/react-router'
-import { motion, easeOut } from 'framer-motion';
+import { easeOut, motion } from 'framer-motion'
+import Social from '@/components/SocialIcons'
 
 export const Route = createFileRoute('/')({
   component: App,
@@ -13,10 +13,10 @@ function App() {
       opacity: 1,
       transition: {
         staggerChildren: 0.2,
-        delayChildren: 0.1
-      }
-    }
-  };
+        delayChildren: 0.1,
+      },
+    },
+  }
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -24,10 +24,10 @@ function App() {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.6
-      }
-    }
-  };
+        duration: 0.6,
+      },
+    },
+  }
 
   const imageVariants = {
     hidden: { opacity: 0, scale: 0.9 },
@@ -36,16 +36,16 @@ function App() {
       scale: 1,
       transition: {
         duration: 0.8,
-        ease: easeOut
-      }
+        ease: easeOut,
+      },
     },
     hover: {
       scale: 1.02,
       transition: {
-        duration: 0.3
-      }
-    }
-  };
+        duration: 0.3,
+      },
+    },
+  }
 
   return (
     <>
@@ -67,7 +67,7 @@ function App() {
               variants={imageVariants}
               whileHover="hover"
             >
-                <div className="relative w-full h-full rounded-full overflow-hidden shadow-2xl">
+              <div className="relative w-full h-full rounded-full overflow-hidden shadow-2xl">
                 <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent z-10 rounded-full" />
                 <img
                   src="/images/headshot.png"
@@ -77,7 +77,7 @@ function App() {
                   className="w-full h-full object-cover rounded-full"
                   loading="eager"
                 />
-                </div>
+              </div>
             </motion.div>
 
             <motion.div
@@ -108,8 +108,9 @@ function App() {
                 className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 max-w-2xl mx-auto lg:mx-0"
                 variants={itemVariants}
               >
-                Computer Science student with a passion for technology, diving, and sailing.
-                Experienced in full-stack development and always eager to learn new technologies.
+                Computer Science student with a passion for technology, diving,
+                and sailing. Experienced in full-stack development and always
+                eager to learn new technologies.
               </motion.p>
 
               <motion.div
@@ -123,5 +124,5 @@ function App() {
         </div>
       </motion.div>
     </>
-  );
+  )
 }
