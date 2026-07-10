@@ -1,0 +1,62 @@
+import { describe, expect, it, vi } from 'vitest'
+import { commands } from './commands'
+import type { CommandContext } from './commands'
+
+const ctx = (): CommandContext => ({ scrollTo: vi.fn(), open: vi.fn() })
+
+const byName = (name: string) => {
+  const cmd = commands.find((c) => c.name === name)
+  if (!cmd) throw new Error(`missing command: ${name}`)
+  return cmd
+}
+
+describe('command registry', () => {
+  it('includes the spec command set', () => {
+    const names = commands.map((c) => c.name)
+    for (const required of [
+      'whoami',
+      'ls projects/',
+      'cat resume.pdf',
+      'sudo hire-me',
+      'help',
+      'cd #work',
+      'cd #projects',
+      'cd #about',
+    ]) {
+      expect(names).toContain(required)
+    }
+  })
+
+  it('whoami outputs identity lines', () => {
+    const result = byName('whoami').run(ctx())
+    expect(result.type).toBe('output')
+    if (result.type === 'output') {
+      expect(result.lines.join('\n')).toContain('CoStar')
+    }
+  })
+
+  it('ls projects/ lists all three projects', () => {
+    const result = byName('ls projects/').run(ctx())
+    if (result.type === 'output') expect(result.lines).toHaveLength(3)
+  })
+
+  it('cd #work scrolls and closes', () => {
+    const c = ctx()
+    const result = byName('cd #work').run(c)
+    expect(result.type).toBe('action')
+    expect(c.scrollTo).toHaveBeenCalledWith('work')
+  })
+
+  it('cat resume.pdf opens the PDF', () => {
+    const c = ctx()
+    byName('cat resume.pdf').run(c)
+    expect(c.open).toHaveBeenCalledWith('/documents/Fulkerson_John_Resume.pdf')
+  })
+
+  it('help lists every command name', () => {
+    const result = byName('help').run(ctx())
+    if (result.type === 'output') {
+      expect(result.lines).toHaveLength(commands.length)
+    }
+  })
+})
