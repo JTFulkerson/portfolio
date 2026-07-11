@@ -49,18 +49,7 @@ export async function fetchGithubActivity(
       signal: AbortSignal.timeout(3000),
     })
     if (!res.ok) return { ok: false }
-    const json = (await res.json()) as {
-      data?: {
-        user?: {
-          contributionsCollection?: {
-            contributionCalendar?: {
-              totalContributions: number
-              weeks: Array<{ contributionDays: Array<CalendarDay> }>
-            }
-          }
-        }
-      }
-    }
+    const json = await res.json()
     const calendar =
       json.data?.user?.contributionsCollection?.contributionCalendar
     if (!calendar) return { ok: false }
@@ -71,6 +60,7 @@ export async function fetchGithubActivity(
         w.contributionDays.map((d) => ({
           date: d.date,
           count: d.contributionCount,
+          // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
           level: LEVELS[d.contributionLevel] ?? 0,
         })),
       ),
