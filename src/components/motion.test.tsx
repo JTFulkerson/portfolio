@@ -1,5 +1,5 @@
 import { render, screen, waitFor } from '@testing-library/react'
-import { describe, expect, it } from 'vitest'
+import { afterEach, describe, expect, it, vi } from 'vitest'
 import { MotionProvider, Reveal, SectionHeading, Typed } from './motion'
 
 describe('Typed', () => {
@@ -36,5 +36,38 @@ describe('SectionHeading', () => {
       </MotionProvider>,
     )
     expect(screen.getByText('work')).toBeTruthy()
+  })
+
+  describe('when the element enters view', () => {
+    afterEach(() => vi.unstubAllGlobals())
+
+    it('ticks the number up to the padded index', async () => {
+      class ImmediateIntersectionObserver {
+        callback: IntersectionObserverCallback
+        constructor(callback: IntersectionObserverCallback) {
+          this.callback = callback
+        }
+        observe(el: Element) {
+          this.callback(
+            [{ isIntersecting: true, target: el } as IntersectionObserverEntry],
+            this as unknown as IntersectionObserver,
+          )
+        }
+        unobserve() {}
+        disconnect() {}
+        takeRecords() {
+          return []
+        }
+      }
+      vi.stubGlobal('IntersectionObserver', ImmediateIntersectionObserver)
+
+      const { container } = render(
+        <MotionProvider>
+          <SectionHeading index={3} title="work" />
+        </MotionProvider>,
+      )
+
+      await waitFor(() => expect(container.textContent).toContain('03 · work'))
+    })
   })
 })
