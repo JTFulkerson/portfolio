@@ -52,11 +52,11 @@ export function CommandPalette({
     if (result.type === 'output') {
       setScrollback((s) => [...s, { input: raw.trim(), lines: result.lines }])
     } else if (result.type === 'async-output') {
-      const idx = scrollback.length
-      setScrollback((s) => [...s, { input: raw.trim(), lines: ['…'] }])
-      void result.lines.then((lines) => {
-        setScrollback((s) => s.map((e, i) => (i === idx ? { ...e, lines } : e)))
-      })
+      const entry: ScrollbackEntry = { input: raw.trim(), lines: ['…'] }
+      setScrollback((s) => [...s, entry])
+      const patch = (lines: Array<OutputLine>) =>
+        setScrollback((s) => s.map((e) => (e === entry ? { ...e, lines } : e)))
+      result.lines.then(patch, () => patch(['command failed']))
     }
     setInput('')
     setSelected(0)
@@ -103,9 +103,10 @@ export function CommandPalette({
                   <span className="text-prompt">❯</span> {entry.input}
                 </div>
                 {entry.lines.map((line, j) =>
-                  typeof line === 'string' ? (
+                  typeof line === 'string' ||
+                  !line.href.startsWith('https://') ? (
                     <div key={j} className="whitespace-pre-wrap text-muted">
-                      {line}
+                      {typeof line === 'string' ? line : line.text}
                     </div>
                   ) : (
                     <div key={j}>

@@ -54,6 +54,36 @@ describe('CommandPalette', () => {
     ).toBe('https://open.spotify.com/track/x')
   })
 
+  it('does not resurrect async output cleared before it resolved', async () => {
+    let resolve!: (v: Awaited<ReturnType<typeof getNowPlaying>>) => void
+    vi.mocked(getNowPlaying).mockReturnValue(
+      new Promise((r) => {
+        resolve = r
+      }),
+    )
+    render(<CommandPalette open onClose={() => {}} />)
+    const input = screen.getByLabelText('Command input')
+    fireEvent.change(input, { target: { value: 'music' } })
+    fireEvent.keyDown(input, { key: 'Enter' })
+    fireEvent.change(input, { target: { value: 'clear' } })
+    fireEvent.keyDown(input, { key: 'Enter' })
+    fireEvent.change(input, { target: { value: 'whoami' } })
+    fireEvent.keyDown(input, { key: 'Enter' })
+    resolve({
+      ok: true,
+      playing: true,
+      title: 'Song',
+      artist: 'Artist',
+      url: 'https://open.spotify.com/track/x',
+    })
+    await vi.waitFor(() =>
+      expect(screen.getByTestId('scrollback').textContent).toContain('CoStar'),
+    )
+    expect(screen.getByTestId('scrollback').textContent).not.toContain(
+      'Song — Artist',
+    )
+  })
+
   it('clear wipes the scrollback without closing', () => {
     const onClose = vi.fn()
     render(<CommandPalette open onClose={onClose} />)
