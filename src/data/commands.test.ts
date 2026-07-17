@@ -1,8 +1,15 @@
 import { describe, expect, it, vi } from 'vitest'
 import { commands } from './commands'
 import type { CommandContext } from './commands'
+import { getNowPlaying } from '@/server/live'
 
-const ctx = (): CommandContext => ({ scrollTo: vi.fn(), open: vi.fn() })
+vi.mock('@/server/live', () => ({ getNowPlaying: vi.fn() }))
+
+const ctx = (): CommandContext => ({
+  scrollTo: vi.fn(),
+  open: vi.fn(),
+  clear: vi.fn(),
+})
 
 const byName = (name: string) => {
   const cmd = commands.find((c) => c.name === name)
@@ -51,6 +58,42 @@ describe('command registry', () => {
     const c = ctx()
     byName('cat resume.pdf').run(c)
     expect(c.open).toHaveBeenCalledWith('/documents/Fulkerson_John_Resume.pdf')
+  })
+
+  it('music resolves now-playing lines asynchronously', async () => {
+    vi.mocked(getNowPlaying).mockResolvedValue({
+      ok: true,
+      playing: true,
+      title: 'Song',
+      artist: 'Artist',
+      url: 'https://open.spotify.com/track/x',
+    })
+    const result = byName('music').run(ctx())
+    expect(result.type).toBe('async-output')
+    if (result.type === 'async-output') {
+      const lines = await result.lines
+      expect(lines[0]).toEqual({
+        text: '♪ Song — Artist',
+        href: 'https://open.spotify.com/track/x',
+      })
+      expect(lines[1]).toContain('now playing')
+    }
+  })
+
+  it('music reports gracefully when spotify is unavailable', async () => {
+    vi.mocked(getNowPlaying).mockResolvedValue({ ok: false })
+    const result = byName('music').run(ctx())
+    if (result.type === 'async-output') {
+      const lines = await result.lines
+      expect(lines[0]).toContain('spotify:')
+    }
+  })
+
+  it('clear invokes the terminal reset', () => {
+    const c = ctx()
+    const result = byName('clear').run(c)
+    expect(result.type).toBe('action')
+    expect(c.clear).toHaveBeenCalled()
   })
 
   it('help lists every command name', () => {

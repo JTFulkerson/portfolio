@@ -1,5 +1,4 @@
 import { GithubPanel } from '@/components/live/GithubPanel'
-import { SpotifyPanel } from '@/components/live/SpotifyPanel'
 import { Reveal, SectionHeading } from '@/components/motion'
 import { aboutChips, aboutStory } from '@/data/about'
 
@@ -23,10 +22,7 @@ export function About() {
             </div>
           </Reveal>
           <Reveal delay={0.1}>
-            <div className="flex flex-col gap-3">
-              <GithubPanel />
-              <SpotifyPanel />
-            </div>
+            <GithubPanel />
           </Reveal>
         </div>
       </div>

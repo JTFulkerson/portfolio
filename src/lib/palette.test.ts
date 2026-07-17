@@ -2,7 +2,11 @@ import { describe, expect, it, vi } from 'vitest'
 import { executeInput, filterCommands } from './palette'
 import type { Command, CommandContext } from '@/data/commands'
 
-const noopCtx: CommandContext = { scrollTo: () => {}, open: () => {} }
+const noopCtx: CommandContext = {
+  scrollTo: () => {},
+  open: () => {},
+  clear: () => {},
+}
 
 const testCommands: Array<Command> = [
   {

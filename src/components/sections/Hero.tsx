@@ -1,4 +1,5 @@
 import { SocialLinks } from '@/components/SocialLinks'
+import { SpotifyPanel } from '@/components/live/SpotifyPanel'
 import { Typed } from '@/components/motion'
 
 export function Hero() {
@@ -13,7 +14,7 @@ export function Hero() {
           <span className="animate-cursor text-accent">_</span>
         </h1>
         <p className="mt-4 inline-block rounded-full border border-accent/30 bg-accent/10 px-3 py-1 text-xs font-medium text-accent">
-          Incoming Software Engineer @ CoStar Group
+          Associate Software Engineer @ CoStar Group
         </p>
         <p className="mt-4 font-mono text-xs text-muted">
           <span className="text-keyword">const</span> focus = [
@@ -42,6 +43,9 @@ export function Hero() {
             resume.pdf
           </a>
           <SocialLinks primaryOnly className="ml-2" />
+        </div>
+        <div className="mt-8">
+          <SpotifyPanel />
         </div>
       </div>
     </section>

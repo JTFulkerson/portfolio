@@ -15,6 +15,7 @@ export const projects: Array<Project> = [
     description:
       "Recipe manager for college students — paste a link and it parses the recipe; generates meals from what's on hand and your dietary preferences. Born from going gluten-free.",
     tags: ['react', 'llm parsing', 'full-stack'],
+    image: '/images/aroma.jpg',
   },
   {
     name: 'Makerspace Platform',

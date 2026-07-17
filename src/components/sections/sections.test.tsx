@@ -32,7 +32,7 @@ describe('sections render', () => {
     render(wrap(<Hero />))
     expect(screen.getByText(/John Fulkerson/)).toBeTruthy()
     expect(
-      screen.getByText('Incoming Software Engineer @ CoStar Group'),
+      screen.getByText('Associate Software Engineer @ CoStar Group'),
     ).toBeTruthy()
     expect(
       screen.getByText('resume.pdf').closest('a')?.getAttribute('href'),

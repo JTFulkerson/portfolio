@@ -38,7 +38,10 @@ export async function fetchNowPlaying(
       signal: AbortSignal.timeout(3000),
     })
     if (!tokenRes.ok) return { ok: false }
-    const { access_token } = (await tokenRes.json()) as { access_token: string }
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+    const { access_token } = (await tokenRes.json()) as {
+      access_token: string
+    }
     const authInit = {
       headers: { authorization: `Bearer ${access_token}` },
       signal: AbortSignal.timeout(3000),
@@ -49,6 +52,7 @@ export async function fetchNowPlaying(
       authInit,
     )
     if (nowRes.status === 200) {
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
       const data = (await nowRes.json()) as { item?: SpotifyTrack }
       if (data.item) return toResult(data.item, true)
     }
@@ -58,8 +62,9 @@ export async function fetchNowPlaying(
       authInit,
     )
     if (!recentRes.ok) return { ok: false }
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
     const recent = (await recentRes.json()) as {
-      items?: Array<{ track: SpotifyTrack }>
+      items?: Array<{ track?: SpotifyTrack }>
     }
     const track = recent.items?.[0]?.track
     if (!track) return { ok: false }

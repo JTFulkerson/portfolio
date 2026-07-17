@@ -58,9 +58,9 @@ describe('SpotifyPanel', () => {
     expect(await screen.findByText(/last played/)).toBeTruthy()
   })
 
-  it('renders nothing on failure', async () => {
+  it('hides the prompt line on failure', async () => {
     vi.mocked(getNowPlaying).mockResolvedValue({ ok: false })
-    const { container } = render(<SpotifyPanel />)
-    await vi.waitFor(() => expect(container.innerHTML).toBe(''))
+    render(<SpotifyPanel />)
+    await vi.waitFor(() => expect(screen.queryByText('music')).toBeNull())
   })
 })

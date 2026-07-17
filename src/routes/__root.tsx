@@ -7,7 +7,7 @@ import { PaletteProvider } from '@/components/palette/PaletteProvider'
 
 const title = 'John Fulkerson — Software Engineer'
 const description =
-  "Incoming Software Engineer at CoStar Group. CS @ University of Delaware '26. Systems, networks, and full-stack work."
+  "Associate Software Engineer at CoStar Group. CS @ University of Delaware '26. Systems, networks, and full-stack work."
 
 export const Route = createRootRoute({
   head: () => ({

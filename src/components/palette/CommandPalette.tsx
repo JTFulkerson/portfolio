@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
-import type { CommandContext } from '@/data/commands'
+import type { CommandContext, OutputLine } from '@/data/commands'
 import { commands } from '@/data/commands'
 import { executeInput, filterCommands } from '@/lib/palette'
 
-type ScrollbackEntry = { input: string; lines: Array<string> }
+type ScrollbackEntry = { input: string; lines: Array<OutputLine> }
 
 export function CommandPalette({
   open,
@@ -42,6 +42,7 @@ export function CommandPalette({
       onClose()
       window.open(url, '_blank', 'noopener,noreferrer')
     },
+    clear: () => setScrollback([]),
   }
 
   const filtered = filterCommands(commands, input)
@@ -50,6 +51,12 @@ export function CommandPalette({
     const result = executeInput(commands, raw, ctx)
     if (result.type === 'output') {
       setScrollback((s) => [...s, { input: raw.trim(), lines: result.lines }])
+    } else if (result.type === 'async-output') {
+      const idx = scrollback.length
+      setScrollback((s) => [...s, { input: raw.trim(), lines: ['…'] }])
+      void result.lines.then((lines) => {
+        setScrollback((s) => s.map((e, i) => (i === idx ? { ...e, lines } : e)))
+      })
     }
     setInput('')
     setSelected(0)
@@ -95,11 +102,24 @@ export function CommandPalette({
                 <div>
                   <span className="text-prompt">❯</span> {entry.input}
                 </div>
-                {entry.lines.map((line, j) => (
-                  <div key={j} className="whitespace-pre-wrap text-muted">
-                    {line}
-                  </div>
-                ))}
+                {entry.lines.map((line, j) =>
+                  typeof line === 'string' ? (
+                    <div key={j} className="whitespace-pre-wrap text-muted">
+                      {line}
+                    </div>
+                  ) : (
+                    <div key={j}>
+                      <a
+                        href={line.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-muted underline-offset-2 hover:text-accent hover:underline"
+                      >
+                        {line.text}
+                      </a>
+                    </div>
+                  ),
+                )}
               </div>
             ))}
           </div>

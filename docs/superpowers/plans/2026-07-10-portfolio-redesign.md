@@ -2059,7 +2059,7 @@ describe('sections render', () => {
     render(wrap(<Hero />))
     expect(screen.getByText(/John Fulkerson/)).toBeTruthy()
     expect(
-      screen.getByText('Incoming Software Engineer @ CoStar Group'),
+      screen.getByText('Associate Software Engineer @ CoStar Group'),
     ).toBeTruthy()
     expect(
       screen.getByText('resume.pdf').closest('a')?.getAttribute('href'),
@@ -2252,7 +2252,7 @@ export function Hero() {
           <span className="animate-cursor text-accent">_</span>
         </h1>
         <p className="mt-4 inline-block rounded-full border border-accent/30 bg-accent/10 px-3 py-1 text-xs font-medium text-accent">
-          Incoming Software Engineer @ CoStar Group
+          Associate Software Engineer @ CoStar Group
         </p>
         <p className="mt-4 font-mono text-xs text-muted">
           <span className="text-keyword">const</span> focus = [
@@ -2561,7 +2561,7 @@ import appCss from '../styles.css?url'
 
 const title = 'John Fulkerson — Software Engineer'
 const description =
-  "Incoming Software Engineer at CoStar Group. CS @ University of Delaware '26. Systems, networks, and full-stack work."
+  "Associate Software Engineer at CoStar Group. CS @ University of Delaware '26. Systems, networks, and full-stack work."
 
 export const Route = createRootRoute({
   head: () => ({

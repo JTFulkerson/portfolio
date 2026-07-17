@@ -2,6 +2,9 @@ import { fireEvent, render, screen } from '@testing-library/react'
 import { describe, expect, it, vi } from 'vitest'
 import { CommandPalette } from './CommandPalette'
 import { PaletteProvider, usePalette } from './PaletteProvider'
+import { getNowPlaying } from '@/server/live'
+
+vi.mock('@/server/live', () => ({ getNowPlaying: vi.fn() }))
 
 describe('CommandPalette', () => {
   it('renders nothing when closed', () => {
@@ -26,6 +29,42 @@ describe('CommandPalette', () => {
     fireEvent.change(input, { target: { value: 'whoami' } })
     fireEvent.keyDown(input, { key: 'Enter' })
     expect(screen.getByTestId('scrollback').textContent).toContain('CoStar')
+  })
+
+  it('shows a placeholder then streams async command output', async () => {
+    vi.mocked(getNowPlaying).mockResolvedValue({
+      ok: true,
+      playing: true,
+      title: 'Song',
+      artist: 'Artist',
+      url: 'https://open.spotify.com/track/x',
+    })
+    render(<CommandPalette open onClose={() => {}} />)
+    const input = screen.getByLabelText('Command input')
+    fireEvent.change(input, { target: { value: 'music' } })
+    fireEvent.keyDown(input, { key: 'Enter' })
+    expect(screen.getByTestId('scrollback').textContent).toContain('…')
+    await vi.waitFor(() =>
+      expect(screen.getByTestId('scrollback').textContent).toContain(
+        'Song — Artist',
+      ),
+    )
+    expect(
+      screen.getByRole('link', { name: /Song — Artist/ }).getAttribute('href'),
+    ).toBe('https://open.spotify.com/track/x')
+  })
+
+  it('clear wipes the scrollback without closing', () => {
+    const onClose = vi.fn()
+    render(<CommandPalette open onClose={onClose} />)
+    const input = screen.getByLabelText('Command input')
+    fireEvent.change(input, { target: { value: 'whoami' } })
+    fireEvent.keyDown(input, { key: 'Enter' })
+    expect(screen.getByTestId('scrollback')).toBeTruthy()
+    fireEvent.change(input, { target: { value: 'clear' } })
+    fireEvent.keyDown(input, { key: 'Enter' })
+    expect(screen.queryByTestId('scrollback')).toBeNull()
+    expect(onClose).not.toHaveBeenCalled()
   })
 
   it('prints command-not-found for unknown input', () => {
