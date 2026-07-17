@@ -29,7 +29,7 @@ export function Nav() {
           ))}
           <button
             onClick={openPalette}
-            aria-label="Open command palette"
+            aria-label="⌘K — open command palette"
             className="rounded-md border border-line px-1.5 py-0.5 font-mono text-[10px] text-muted hover:text-fg"
           >
             ⌘K

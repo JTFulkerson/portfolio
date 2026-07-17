@@ -25,7 +25,7 @@ describe('sections render', () => {
     render(wrap(<Nav />))
     expect(screen.getByText('~/jfulkerson')).toBeTruthy()
     expect(screen.getByText('work')).toBeTruthy()
-    expect(screen.getByLabelText('Open command palette')).toBeTruthy()
+    expect(screen.getByLabelText('⌘K — open command palette')).toBeTruthy()
   })
 
   it('Hero shows name, CoStar badge, and resume link', () => {
