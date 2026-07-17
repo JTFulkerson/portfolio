@@ -1,0 +1,4 @@
+GITHUB_TOKEN=ghp_xxx            # classic PAT, read:user scope only
+SPOTIFY_CLIENT_ID=xxx           # developer.spotify.com app
+SPOTIFY_CLIENT_SECRET=xxx
+SPOTIFY_REFRESH_TOKEN=xxx       # generate with: node scripts/spotify-refresh-token.mjs
