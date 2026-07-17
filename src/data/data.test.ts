@@ -6,11 +6,11 @@ import { sections } from './sections'
 import { socials } from './socials'
 
 describe('content data', () => {
-  it('features exactly three jobs, CoStar incoming first', () => {
+  it('features exactly three jobs, CoStar first', () => {
     const featured = jobs.filter((j) => j.featured)
     expect(featured).toHaveLength(3)
     expect(featured[0].company).toBe('CoStar Group')
-    expect(featured[0].status).toBe('incoming')
+    expect(featured[0].title).toBe('Associate Software Engineer')
   })
 
   it('has the three approved projects in order', () => {

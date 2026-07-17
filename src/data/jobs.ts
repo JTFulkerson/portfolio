@@ -9,10 +9,9 @@ export type Job = {
 
 export const jobs: Array<Job> = [
   {
-    title: 'Software Engineer',
+    title: 'Associate Software Engineer',
     company: 'CoStar Group',
     period: '2026 →',
-    status: 'incoming',
     featured: true,
   },
   {
