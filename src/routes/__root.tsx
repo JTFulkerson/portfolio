@@ -22,7 +22,11 @@ export const Route = createRootRoute({
       { property: 'og:type', content: 'website' },
       { property: 'og:url', content: 'https://johnfulkerson.com' },
     ],
-    links: [{ rel: 'stylesheet', href: appCss }],
+    links: [
+      { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
+      { rel: 'icon', href: '/favicon.ico', sizes: '32x32' },
+      { rel: 'stylesheet', href: appCss },
+    ],
   }),
 
   shellComponent: RootDocument,
