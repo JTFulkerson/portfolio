@@ -1,5 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { About } from '@/components/sections/About'
+import { Education } from '@/components/sections/Education'
 import { Footer } from '@/components/sections/Footer'
 import { Hero } from '@/components/sections/Hero'
 import { Nav } from '@/components/sections/Nav'
@@ -18,6 +19,7 @@ function HomePage() {
         <Hero />
         <WorkTimeline />
         <Projects />
+        <Education />
         <About />
       </main>
       <Footer />

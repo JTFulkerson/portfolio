@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { aboutChips, aboutStory } from './about'
+import { education } from './education'
 import { jobs } from './jobs'
 import { projects } from './projects'
 import { sections } from './sections'
@@ -30,7 +31,22 @@ describe('content data', () => {
   })
 
   it('has section anchors for nav', () => {
-    expect(sections.map((s) => s.id)).toEqual(['work', 'projects', 'about'])
+    expect(sections.map((s) => s.id)).toEqual([
+      'work',
+      'projects',
+      'education',
+      'about',
+    ])
+  })
+
+  it('education matches the resume', () => {
+    expect(education.degree).toBe('B.S. Computer Science')
+    expect(education.gpa).toBe('3.85')
+    expect(education.coursework).toHaveLength(4)
+    expect(education.activities.map((a) => a.role)).toEqual([
+      'Commodore',
+      'Boatswain',
+    ])
   })
 
   it('about content exists', () => {
