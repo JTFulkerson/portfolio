@@ -8,7 +8,7 @@ Personal portfolio site for John Fulkerson (johnfulkerson.com), built with TanSt
 
 ## Commands
 
-Package manager is `pnpm` (a `pnpm-lock.yaml` is committed — don't use npm/yarn).
+Package manager is `pnpm`, pinned via `packageManager` in `package.json` (use `corepack enable`); Node 24 is pinned in `.node-version`. A `pnpm-lock.yaml` is committed — don't use npm/yarn.
 
 ```bash
 pnpm install       # install deps
@@ -22,7 +22,7 @@ pnpm check         # prettier --write . && eslint --fix
 pnpm deploy        # build, then `wrangler deploy`
 ```
 
-To run a single test file with vitest: `pnpm vitest run path/to/file.test.ts`. There are currently no test files in the repo, but the vitest/jsdom/testing-library toolchain is installed and configured.
+To run a single test file with vitest: `pnpm vitest run path/to/file.test.ts`. Tests are colocated with the code they cover (`*.test.ts(x)`) and run under jsdom with Testing Library; setup lives in `src/test/setup.ts`.
 
 ## Architecture
 

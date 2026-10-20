@@ -672,8 +672,7 @@ export type CommandContext = {
 }
 
 export type CommandResult =
-  | { type: 'output'; lines: Array<string> }
-  | { type: 'action' }
+  { type: 'output'; lines: Array<string> } | { type: 'action' }
 
 export type Command = {
   name: string
@@ -1560,8 +1559,7 @@ export function _clearCache() {
 export type GithubDay = { date: string; count: number; level: number }
 
 export type GithubActivity =
-  | { ok: true; total: number; weeks: Array<Array<GithubDay>> }
-  | { ok: false }
+  { ok: true; total: number; weeks: Array<Array<GithubDay>> } | { ok: false }
 
 const QUERY = `query($login: String!) {
   user(login: $login) {
@@ -2475,8 +2473,8 @@ export function Footer() {
     <footer className="border-t border-line px-5 py-8">
       <div className="mx-auto flex max-w-3xl flex-col items-center justify-between gap-3 sm:flex-row">
         <span className="font-mono text-[10px] text-faint">
-          © {new Date().getFullYear()} · built with tanstack start on
-          cloudflare workers
+          © {new Date().getFullYear()} · built with tanstack start on cloudflare
+          workers
         </span>
         <SocialLinks />
       </div>
