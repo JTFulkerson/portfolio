@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import type { CommandContext, OutputLine } from '@/data/commands'
 import { commands } from '@/data/commands'
 import { executeInput, filterCommands } from '@/lib/palette'
+import { scrollToSection } from '@/lib/scroll'
 
 type ScrollbackEntry = { input: string; lines: Array<OutputLine> }
 
@@ -36,7 +37,7 @@ export function CommandPalette({
   const ctx: CommandContext = {
     scrollTo: (id) => {
       onClose()
-      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+      scrollToSection(id)
     },
     open: (url) => {
       onClose()

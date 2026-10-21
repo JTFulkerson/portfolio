@@ -1,5 +1,6 @@
 import { usePalette } from '@/components/palette/PaletteProvider'
 import { sections } from '@/data/sections'
+import { onSectionLinkClick } from '@/lib/scroll'
 import { useActiveSection } from '@/lib/use-active-section'
 
 const ids = sections.map((s) => s.id)
@@ -10,7 +11,11 @@ export function Nav() {
   return (
     <header className="sticky top-0 z-40 border-b border-line bg-bg/80 backdrop-blur">
       <div className="mx-auto flex max-w-3xl items-center justify-between px-5 py-3.5">
-        <a href="#top" className="font-mono text-xs text-muted hover:text-fg">
+        <a
+          href="#top"
+          onClick={(e) => onSectionLinkClick(e, 'top')}
+          className="font-mono text-xs text-muted hover:text-fg"
+        >
           ~/jfulkerson
         </a>
         <nav
@@ -21,6 +26,7 @@ export function Nav() {
             <a
               key={s.id}
               href={`#${s.id}`}
+              onClick={(e) => onSectionLinkClick(e, s.id)}
               className={
                 active === s.id
                   ? 'font-medium text-fg'

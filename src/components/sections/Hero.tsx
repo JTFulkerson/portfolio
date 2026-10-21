@@ -1,6 +1,7 @@
 import { SocialLinks } from '@/components/SocialLinks'
 import { SpotifyPanel } from '@/components/live/SpotifyPanel'
 import { Typed } from '@/components/motion'
+import { onSectionLinkClick } from '@/lib/scroll'
 
 export function Hero() {
   return (
@@ -30,6 +31,7 @@ export function Hero() {
         <div className="mt-7 flex flex-wrap items-center gap-3">
           <a
             href="#work"
+            onClick={(e) => onSectionLinkClick(e, 'work')}
             className="rounded-lg bg-fg px-4 py-2 text-xs font-medium text-bg hover:opacity-90"
           >
             View work ↓
