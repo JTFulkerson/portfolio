@@ -35,9 +35,9 @@ export const jobs: Array<Job> = [
   {
     title: 'Teaching Assistant',
     company: 'University of Delaware',
-    period: '2025 – 2026',
+    period: 'fall 2025',
     description:
-      'Supported a 40-student full-stack web development course (React, Node.js, REST APIs) through office hours and Discord, and graded projects with actionable feedback on performance and security.',
+      "Supported a 40-student full-stack web development course (React, Node.js, REST APIs) through office hours and Discord, and graded projects with actionable feedback on performance and security. Named the CIS department's Outstanding Undergraduate Teaching Assistant for 2025–2026.",
     featured: false,
   },
   {

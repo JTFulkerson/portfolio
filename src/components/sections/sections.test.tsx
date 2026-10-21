@@ -62,6 +62,9 @@ describe('sections render', () => {
     expect(screen.getByText(/B\.S\. Computer Science/)).toBeTruthy()
     expect(screen.getByText('Web Application Security')).toBeTruthy()
     expect(screen.getByText(/Boatswain/)).toBeTruthy()
+    expect(
+      screen.getByText(/Outstanding Undergraduate Teaching Assistant Award/),
+    ).toBeTruthy()
   })
 
   it('WorkTimeline expander reveals every earlier role', async () => {
