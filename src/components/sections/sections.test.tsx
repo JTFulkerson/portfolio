@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import { describe, expect, it, vi } from 'vitest'
 import { About } from './About'
+import { Education } from './Education'
 import { Footer } from './Footer'
 import { Hero } from './Hero'
 import { Nav } from './Nav'
@@ -53,6 +54,21 @@ describe('sections render', () => {
     )
     expect(screen.getByText('Makerspace Platform')).toBeTruthy()
     expect(screen.getByText('Timer')).toBeTruthy()
+  })
+
+  it('Education renders degree, GPA, coursework, and activities', () => {
+    render(wrap(<Education />))
+    expect(screen.getByText('University of Delaware')).toBeTruthy()
+    expect(screen.getByText(/B\.S\. Computer Science/)).toBeTruthy()
+    expect(screen.getByText('Web Application Security')).toBeTruthy()
+    expect(screen.getByText(/Boatswain/)).toBeTruthy()
+  })
+
+  it('WorkTimeline expander reveals every earlier role', async () => {
+    render(wrap(<WorkTimeline />))
+    screen.getByText(/earlier roles/).click()
+    expect(await screen.findByText('Teaching Assistant')).toBeTruthy()
+    expect(screen.getByText('Student Technician')).toBeTruthy()
   })
 
   it('About renders story and chips', () => {

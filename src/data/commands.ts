@@ -72,6 +72,15 @@ export const commands: Array<Command> = [
     },
   },
   {
+    name: 'cd #education',
+    description: 'scroll to education',
+    keywords: ['education', 'school', 'gpa'],
+    run: (ctx) => {
+      ctx.scrollTo('education')
+      return { type: 'action' }
+    },
+  },
+  {
     name: 'cd #about',
     description: 'scroll to about',
     keywords: ['about'],

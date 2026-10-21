@@ -45,8 +45,8 @@ export function WorkTimeline() {
               onClick={() => setExpanded(true)}
               className="text-left font-mono text-[11px] text-faint hover:text-fg"
             >
-              + {rest.length} earlier roles — resident assistant · dive
-              instructor · event tech
+              + {rest.length} earlier roles — teaching assistant · resident
+              assistant · scuba instructor · event tech
             </button>
           )}
         </div>

@@ -28,6 +28,7 @@ describe('command registry', () => {
       'help',
       'cd #work',
       'cd #projects',
+      'cd #education',
       'cd #about',
     ]) {
       expect(names).toContain(required)

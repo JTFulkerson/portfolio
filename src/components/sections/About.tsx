@@ -6,7 +6,7 @@ export function About() {
   return (
     <section id="about" className="border-t border-line px-5 py-16">
       <div className="mx-auto max-w-3xl">
-        <SectionHeading index={3} title="about" />
+        <SectionHeading index={4} title="about" />
         <div className="grid gap-8 sm:grid-cols-[1.4fr_1fr]">
           <Reveal>
             <p className="text-sm leading-relaxed text-muted">{aboutStory}</p>

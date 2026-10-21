@@ -21,7 +21,7 @@ export const projects: Array<Project> = [
     name: 'Makerspace Platform',
     status: 'in production @ UD',
     description:
-      'Operations platform for Pearson Hall Makerspace — usage analytics and custom saved queries for staff, students, and deans.',
+      'Full-stack operations platform for Pearson Hall Makerspace — real-time space-usage and finance tracking, usage analytics, and custom saved queries for staff, students, and deans.',
     tags: ['full-stack', 'analytics', 'senior design'],
   },
   {

@@ -13,7 +13,10 @@ export function Nav() {
         <a href="#top" className="font-mono text-xs text-muted hover:text-fg">
           ~/jfulkerson
         </a>
-        <nav className="flex items-center gap-5 text-xs" aria-label="Sections">
+        <nav
+          className="flex items-center gap-3 text-xs sm:gap-5"
+          aria-label="Sections"
+        >
           {sections.map((s) => (
             <a
               key={s.id}
