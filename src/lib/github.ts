@@ -1,8 +1,7 @@
 export type GithubDay = { date: string; count: number; level: number }
 
 export type GithubActivity =
-  | { ok: true; total: number; weeks: Array<Array<GithubDay>> }
-  | { ok: false }
+  { ok: true; total: number; weeks: Array<Array<GithubDay>> } | { ok: false }
 
 const QUERY = `query($login: String!) {
   user(login: $login) {
