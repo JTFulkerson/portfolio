@@ -7,6 +7,9 @@ export const education = {
   gpa: '3.85',
   majorGpa: '3.96',
   deansList: "Dean's List every semester — fall 2022 through spring 2026",
+  awards: [
+    'Outstanding Undergraduate Teaching Assistant Award — CIS, 2025–2026',
+  ],
   coursework: [
     'Computer Networks',
     'Web Application Security',

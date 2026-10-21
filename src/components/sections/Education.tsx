@@ -27,6 +27,11 @@ export function Education() {
           <p className="mt-1 text-xs leading-relaxed text-muted">
             {education.deansList}
           </p>
+          {education.awards.map((award) => (
+            <p key={award} className="mt-1 text-xs leading-relaxed text-muted">
+              <span className="text-accent">★</span> {award}
+            </p>
+          ))}
           <div className="mt-3 flex flex-wrap gap-1.5">
             {education.coursework.map((course) => (
               <span
