@@ -4,7 +4,6 @@ dist
 dist-ssr
 *.local
 count.txt
-.env
 .nitro
 .tanstack
 .output
@@ -12,4 +11,15 @@ count.txt
 todos.json
 .superpowers/
 .wrangler/
+
+# Secrets: never commit env files, Wrangler dev vars or key material.
+# (.dev.vars.example is the committed template.)
+.env
+.env.*
 .dev.vars
+.dev.vars.*
+!.dev.vars.example
+*.pem
+*.key
+*.p12
+*.pfx
